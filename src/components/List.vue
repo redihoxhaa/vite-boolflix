@@ -15,6 +15,14 @@ export default {
     }
   },
   methods: {
+    getFlag(lang) {
+      const result = store.languageMapping[lang];
+      if (!!result) {
+        return result
+      }
+      return false
+
+    },
   },
   mounted() { },
 }
@@ -25,9 +33,9 @@ export default {
     <li v-for="result in store.searchResults">
       <h2 class="opera-title">{{ result.title }}</h2>
       <h3 class="opera-original-title">{{ result.original_title }}</h3>
-      <img :src="`https://flagsapi.com/${result.original_language.toUpperCase()}/flat/32.png`"
-        :alt="result.original_language + ' flag'" ref="movieFlag">
-      <p class="opera-language">{{ result.original_language }}</p>
+      <span :class="`fi fis fi-${getFlag(result.original_language)}`" v-if="getFlag(result.original_language)"></span>
+      <!-- Puoi provare a cercare 'swahili' -->
+      <p class="opera-language" v-else>Non ho trovato la bandiera di {{ result.original_language }}</p>
       <p class="opera-rate">{{ result.vote_average }}</p>
     </li>
   </ul>
