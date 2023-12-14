@@ -1,13 +1,23 @@
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SearchBar from './components/SearchBar.vue'
+import List from './components/List.vue'
+
+import { store } from './store';
 
 export default {
-  components: { HelloWorld }
+  data() {
+    return {
+      store,
+
+    }
+  },
+  components: { SearchBar, List }
 }
 </script>
 
 <template>
-  <HelloWorld />
+  <SearchBar />
+  <List />
 </template>
 
 <style lang="scss" scoped></style>
