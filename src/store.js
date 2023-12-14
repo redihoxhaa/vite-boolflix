@@ -2,10 +2,13 @@ import { reactive } from 'vue'
 
 export const store = reactive({
     moviesAPI: 'https://api.themoviedb.org/3/search/movie',
-    searchResults: [],
+    tvAPI: 'https://api.themoviedb.org/3/search/tv',
+    searchMovieResults: [],
+    searchTvResults: [],
     searchLanguage: 'it-IT',
     searchKey: '',
-    currentPage: 1,
+    currentMoviePage: 1,
+    currentTVPage: 1,
     languageMapping: {
         "aa": "dj",
         "af": "za",

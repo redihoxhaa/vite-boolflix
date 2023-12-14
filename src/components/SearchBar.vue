@@ -14,16 +14,32 @@ export default {
     }
   },
   methods: {
-    searchTerm() {
+
+    // Funzione per cercare i film
+    searchMovie() {
       axios.get(store.moviesAPI, {
         params: {
           api_key: 'c102053cc7cdde6f47ccfb1d24cbd4e6',
           language: store.searchLanguage,
           query: store.searchKey,
-          page: store.currentPage,
+          page: store.currentMoviePage,
         }
       }).then(response => {
-        store.searchResults = response.data.results;
+        store.searchMovieResults = response.data.results;
+      })
+    },
+
+    // Funzione per cercare le serie tv
+    searchTV() {
+      axios.get(store.tvAPI, {
+        params: {
+          api_key: 'c102053cc7cdde6f47ccfb1d24cbd4e6',
+          language: store.searchLanguage,
+          query: store.searchKey,
+          page: store.currentTVPage,
+        }
+      }).then(response => {
+        store.searchTvResults = response.data.results;
       })
     },
   },
@@ -37,7 +53,8 @@ export default {
     <div class="input-group mt-5">
       <input type=" text" class="form-control" placeholder="Cosa vuoi guardare oggi?"
         aria-label="Cosa vuoi guardare oggi?" aria-describedby="button-addon2" v-model="store.searchKey">
-      <button class="btn btn-outline-secondary" type="button" id="search-btn" @click="searchTerm()">Cerca</button>
+      <button class="btn btn-outline-secondary" type="button" id="search-btn"
+        @click="searchMovie(); searchTV();">Cerca</button>
     </div>
   </div>
 </template>
