@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 export const store = reactive({
     moviesAPI: 'https://api.themoviedb.org/3/search/movie',
     tvAPI: 'https://api.themoviedb.org/3/search/tv',
+    coverURL: 'https://image.tmdb.org/t/p/w342/',
     searchMovieResults: [],
     searchTvResults: [],
     searchLanguage: 'it-IT',

@@ -1,6 +1,6 @@
 <script>
 import SearchBar from './components/SearchBar.vue'
-import List from './components/List.vue'
+import ListsBoard from './components/ListsBoard.vue'
 
 import { store } from './store';
 
@@ -11,13 +11,13 @@ export default {
 
     }
   },
-  components: { SearchBar, List }
+  components: { SearchBar, ListsBoard }
 }
 </script>
 
 <template>
   <SearchBar />
-  <List />
+  <ListsBoard />
 </template>
 
 <style lang="scss" scoped></style>
