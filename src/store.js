@@ -5,5 +5,6 @@ export const store = reactive({
     searchResults: [],
     searchLanguage: 'it-IT',
     searchKey: '',
+    currentPage: 1,
 });
 
