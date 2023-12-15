@@ -1,5 +1,5 @@
 <script>
-import SearchBar from './components/SearchBar.vue'
+import Header from './components/Header.vue'
 import ListsBoard from './components/ListsBoard.vue'
 
 import { store } from './store';
@@ -11,12 +11,12 @@ export default {
 
     }
   },
-  components: { SearchBar, ListsBoard }
+  components: { Header, ListsBoard }
 }
 </script>
 
 <template>
-  <SearchBar />
+  <Header />
   <ListsBoard />
 </template>
 

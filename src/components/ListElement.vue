@@ -1,16 +1,21 @@
 <script>
 // IMPORTS
 import { store } from '../store';
-import axios from 'axios';
 
 // /IMPORTS
 
 export default {
-    props: ['arrayToSearchIn', 'titleKey', 'originalTitleKey'],
+    props: ['titleKey', 'originalTitleKey', 'posterPath', 'vote', 'language'],
     components: {},
     data() {
         return {
             store
+        }
+    },
+    computed: {
+
+        from10to5rate() {
+            return Math.ceil(this.vote * 5 / 10)
         }
     },
     methods: {
@@ -23,12 +28,6 @@ export default {
 
         },
 
-        from10to5rate(rate) {
-            return Math.ceil(rate * 5 / 10)
-
-        },
-
-
     },
     mounted() {
     },
@@ -36,28 +35,29 @@ export default {
 </script>
 
 <template>
-    <li v-for="result in arrayToSearchIn">
-        <div class="pic-container">
-            <img :src="store.posterURL + result.poster_path" :alt="'Copertina' + result[titleKey]"
-                v-if="result.poster_path !== null">
-            <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else>
-        </div>
-        <h2 class="opera-title">{{ result[titleKey] }}</h2>
-        <h5 class="opera-original-title" v-if="result[originalTitleKey] !== result[titleKey]">Titolo originale: {{
-            result[originalTitleKey] }}</h5>
-        <span :class="`fi fir fi-${getFlag(result.original_language)}`" v-if="getFlag(result.original_language)"></span>
-        <!-- Puoi provare a cercare 'guarani' -->
-        <p class="opera-language" v-else>{{ result.original_language.toUpperCase() }}</p>
-        <div class="opera-rate">
-            <font-awesome-icon icon="fa-solid fa-star" v-for="n in from10to5rate(result.vote_average)" />
-            <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate(result.vote_average)" />
-            <span v-if="from10to5rate(result.vote_average) === 0">Questo è sicuramente un film di nicchia 😂</span>
-        </div>
-    </li>
+    <div class="pic-container">
+        <img :src="store.posterURL + posterPath" :alt="'Copertina' + titleKey" v-if="posterPath !== null">
+        <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else>
+    </div>
+    <h2 class="opera-title">{{ titleKey }}</h2>
+    <h5 class="opera-original-title" v-if="originalTitleKey !== titleKey">Titolo originale: {{
+        originalTitleKey }}</h5>
+    <span :class="`fi fir fi-${getFlag(language)}`" v-if="getFlag(language)"></span>
+    <!-- Puoi provare a cercare 'guarani' -->
+    <p class="opera-language" v-else>{{ language.toUpperCase() }}</p>
+    <div class="opera-rate">
+        <font-awesome-icon icon="fa-solid fa-star" v-for="n in  from10to5rate" />
+        <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate" />
+        <span v-if="from10to5rate === 0">Questo è sicuramente un film di nicchia 😂</span>
+    </div>
 </template>
 
 <style lang="scss" scoped>
 // USES
+
+@use '../assets/scss/partials/variables' as *;
+
+// /USES
 
 .fi.fir {
 
@@ -67,5 +67,7 @@ export default {
 
 }
 
-// /USES
+.fa-star {
+    color: $star-color;
+}
 </style>

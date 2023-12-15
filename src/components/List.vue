@@ -22,8 +22,10 @@ export default {
 <template>
     <div class="card col-6" v-if="arrayToSearchIn.length !== 0">
         <ul>
-            <ListElement :arrayToSearchIn="this.arrayToSearchIn" :titleKey="this.titleKey"
-                :originalTitleKey="this.originalTitleKey" />
+            <li v-for="result in arrayToSearchIn">
+                <ListElement :titleKey="result[titleKey]" :originalTitleKey="result[originalTitleKey]"
+                    :posterPath="result.poster_path" :language="result.original_language" :vote="result.vote_average" />
+            </li>
         </ul>
     </div>
 </template>
