@@ -2,5 +2,12 @@
 @use '../scss/partials/mediaqueries' as *;
 @use '../scss/partials/typography' as *;
 @use '../scss/partials/utilities' as *;
+@use '../scss/partials/variables' as *;
+@use '../scss/partials/reset' as *;
+
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 @import '../../../node_modules/flag-icons/css/flag-icons.min.css';
+
+body {
+    background-color: $bg-color;
+}
