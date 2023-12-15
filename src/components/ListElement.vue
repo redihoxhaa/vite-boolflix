@@ -1,7 +1,7 @@
 <script>
 // IMPORTS
 import { store } from '../store';
-
+import axios from 'axios';
 
 // /IMPORTS
 
@@ -26,7 +26,9 @@ export default {
         from10to5rate(rate) {
             return Math.ceil(rate * 5 / 10)
 
-        }
+        },
+
+
     },
     mounted() {
     },
@@ -36,13 +38,16 @@ export default {
 <template>
     <li v-for="result in arrayToSearchIn">
         <div class="pic-container">
-            <img :src="store.coverURL + result.poster_path" :alt="'Copertina' + result[titleKey]">
+            <img :src="store.posterURL + result.poster_path" :alt="'Copertina' + result[titleKey]"
+                v-if="result.poster_path !== null">
+            <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else>
         </div>
         <h2 class="opera-title">{{ result[titleKey] }}</h2>
-        <h5 class="opera-original-title">Titolo originale: {{ result[originalTitleKey] }}</h5>
-        <span :class="`fi fis fi-${getFlag(result.original_language)}`" v-if="getFlag(result.original_language)"></span>
-        <!-- Puoi provare a cercare 'swahili' -->
-        <p class="opera-language" v-else>Non ho trovato la bandiera di {{ result.original_language }}</p>
+        <h5 class="opera-original-title" v-if="result[originalTitleKey] !== result[titleKey]">Titolo originale: {{
+            result[originalTitleKey] }}</h5>
+        <span :class="`fi fir fi-${getFlag(result.original_language)}`" v-if="getFlag(result.original_language)"></span>
+        <!-- Puoi provare a cercare 'guarani' -->
+        <p class="opera-language" v-else>{{ result.original_language.toUpperCase() }}</p>
         <div class="opera-rate">
             <font-awesome-icon icon="fa-solid fa-star" v-for="n in from10to5rate(result.vote_average)" />
             <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate(result.vote_average)" />
@@ -54,10 +59,10 @@ export default {
 <style lang="scss" scoped>
 // USES
 
-.fi.fis {
+.fi.fir {
 
     width: 60px !important;
-    height: 60px;
+    height: 45px;
     background-size: cover;
 
 }
