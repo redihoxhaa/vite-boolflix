@@ -45,7 +45,6 @@ export default {
     position: relative;
 
     header {
-        width: 87%;
         transition: all 1s ease-out;
     }
 }
@@ -53,7 +52,7 @@ export default {
 
 
 .minimized {
-    width: 100%;
+    width: 87%;
     height: 50px;
     flex-direction: row !important;
     justify-content: space-between;
