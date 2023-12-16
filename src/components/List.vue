@@ -21,11 +21,11 @@ export default {
 
 <template>
     <div class="col-12 ">
-        <header class="mb-3 d-flex justify-content-center">
+        <header class="mb-1 d-flex justify-content-center">
             <h2>{{ sectionTitle }}</h2>
         </header>
-        <ul class="col-12 d-flex mb-5 pb-3">
-            <li v-for="result in arrayToSearchIn" class="col-3">
+        <ul class="col-12 d-flex pb-3">
+            <li v-for="result in arrayToSearchIn" class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <ListElement :titleKey="result[titleKey]" :originalTitleKey="result[originalTitleKey]"
                     :posterPath="result.poster_path" :language="result.original_language" :vote="result.vote_average"
                     :overview="result.overview" />
@@ -79,7 +79,5 @@ header {
 
 ul {
     overflow-x: scroll;
-
-    li {}
 }
 </style>

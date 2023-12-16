@@ -40,7 +40,8 @@ export default {
             <div class="border"></div>
             <img :src="store.posterURL + posterPath" :alt="'Copertina' + titleKey" v-if="posterPath !== null">
             <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else>
-            <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center">
+            <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center"
+                :class="{ 'get-opacity': posterPath === null }">
                 <h2 class="opera-title">{{ titleKey }}</h2>
                 <h5 class="opera-original-title text-uppercase" v-if="originalTitleKey !== titleKey">Titolo
                     originale: {{
@@ -71,7 +72,6 @@ export default {
     padding: 15px;
 
     .pic-container {
-        width: 100%;
         border-radius: 20px;
         overflow: hidden;
         position: relative;
@@ -79,7 +79,7 @@ export default {
 
 
         .border {
-            box-shadow: inset 0px 0px 0px 2px white;
+            box-shadow: inset 0px 0px 0px 2px $secondary-text-color;
             position: absolute;
             inset: 0 0 0 0;
             z-index: 5;
@@ -122,6 +122,7 @@ export default {
 
             h2 {
                 color: $text-color;
+                font-size: 1.5rem;
             }
 
             h5,
@@ -174,5 +175,9 @@ export default {
 
     }
 
+}
+
+.get-opacity {
+    opacity: 1 !important;
 }
 </style>

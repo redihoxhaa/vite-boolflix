@@ -11,14 +11,14 @@ export default {
   data() {
     return {
       store,
-      emptyResultsMsg: '',
-      didISearchStatus: false,
+
     }
   },
   methods: {
 
     // Funzione per cercare i film
     searchMovie() {
+      store.searchMovieResults = [];
       axios.get(store.moviesAPI, {
         params: {
           api_key: 'c102053cc7cdde6f47ccfb1d24cbd4e6',
@@ -27,15 +27,18 @@ export default {
           page: store.currentMoviePage,
         }
       }).then(response => {
-        store.searchMovieResults = response.data.results;
-        if (response.data.results.length === 0) {
-          this.emptyResultsMsg = 'Non ci sono risultati disponibili, potrebbe essere un idea per un nuovo film? 😎';
+        if (response.data.results.length !== 0) {
+          store.searchMovieResults = response.data.results;
+        } else {
+          setTimeout(function () { store.emptyMessage = 'Non ci sono risultati disponibili, potrebbe essere un\'idea per un nuovo film? 😎' }, 500);
+          setTimeout(function () { store.emptyMessage = '' }, 4000);
+
         }
       })
     },
 
-    // Funzione per cercare le serie tv
     searchTV() {
+      store.searchTvResults = [];
       axios.get(store.tvAPI, {
         params: {
           api_key: 'c102053cc7cdde6f47ccfb1d24cbd4e6',
@@ -44,20 +47,23 @@ export default {
           page: store.currentTVPage,
         }
       }).then(response => {
-        store.searchTvResults = response.data.results;
-        if (response.data.results.length === 0) {
-          this.emptyResultsMsg = 'Non ci sono risultati disponibili, potrebbe essere un\'idea per un nuovo film? 😎';
+        if (response.data.results.length !== 0) {
+          store.searchTvResults = response.data.results;
+        } else {
+          setTimeout(function () { store.emptyMessage = 'Non ci sono risultati disponibili, potrebbe essere un\'idea per un nuovo film? 😎' }, 500);
+          setTimeout(function () { store.emptyMessage = '' }, 4000);
         }
       })
     },
 
     didISearch() {
-      this.didISearchStatus = true;
-      const scope = this
+      store.didISearchStatus = true;
+      store.searchKey = store.searchKeyPreview;
       setTimeout(function () {
-        scope.didISearchStatus = false;
-      }, 2800)
-    }
+        store.didISearchStatus = false;
+      }, 3000)
+    },
+
   },
   mounted() {
   },
@@ -66,27 +72,29 @@ export default {
 
 <template>
   <div class="wrapper">
-    <div class="input-group mt-5">
+    <div class="input-group"
+      :class="{ shake: store.searchKey === '' && store.didISearchStatus === true }, { 'minimize': store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0 }">
       <input type=" text" class="form-control shadow-none" placeholder="Cosa vuoi guardare oggi?"
-        aria-label="Cosa vuoi guardare oggi?" aria-describedby="button-addon2" v-model="store.searchKey"
-        @keyup.enter="searchMovie(); searchTV(); didISearch()">
+        aria-label="Cosa vuoi guardare oggi?" aria-describedby="button-addon2" v-model="store.searchKeyPreview"
+        @keyup.enter="didISearch(); searchMovie(); searchTV();">
       <button class="btn btn-outline-secondary" type="button" id="search-btn"
-        @click="searchMovie(); searchTV(); didISearch()">Cerca</button>
+        @click="didISearch(); searchMovie(); searchTV();">Cerca</button>
 
     </div>
-    <p class="empty-search-msg" v-if="store.searchKey === '' && didISearchStatus === true">E che devo cercare, il nulla?
+    <p class="empty-search-msg" v-if="store.searchKey === '' && store.didISearchStatus === true">E che devo cercare, il
+      nulla?
       🤔
     </p>
     <p class="empty-results-msg"
-      v-else-if="store.searchMovieResults.length === 0 && store.searchTvResults.length === 0 && didISearchStatus === true">
-      {{
-        this.emptyResultsMsg }}</p>
+      v-else-if="store.searchMovieResults.length === 0 && store.searchTvResults.length === 0 && store.didISearchStatus === true">
+      {{ store.emptyMessage }}</p>
   </div>
 </template>
 
 <style lang="scss" scoped>
 // USES
 @use '../assets/scss/partials/variables' as *;
+@use '../assets/scss/partials/animations' as *;
 // /USES
 
 .wrapper {
@@ -128,5 +136,17 @@ export default {
     top: 35px;
     left: 0;
   }
+
+  .minimize {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .minimize {
+    width: 500px !important;
+    margin-bottom: 30px;
+  }
+
 }
 </style>

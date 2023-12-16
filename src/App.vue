@@ -16,9 +16,11 @@ export default {
 </script>
 
 <template>
-  <div class="container d-flex flex-column align-items-center justify-content-center">
-    <Header />
-    <Main v-if="store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0" />
+  <div class="wrapper">
+    <div class="container d-flex flex-column align-items-center justify-content-center">
+      <Header />
+      <Main v-if="store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0" />
+    </div>
   </div>
 </template>
 
@@ -28,10 +30,11 @@ export default {
 @use './assets/scss/partials/variables' as *;
 
 // /USES
-
-.container {
+.wrapper {
   width: 100vw;
   height: 100vh;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

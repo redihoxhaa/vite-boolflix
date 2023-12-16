@@ -11,9 +11,13 @@ export const store = reactive({
     searchMovieResults: [],
     searchTvResults: [],
     searchLanguage: 'it-IT',
+    didISearchStatus: false,
     searchKey: '',
+    searchKeyPreview: '',
     currentMoviePage: 1,
     currentTVPage: 1,
+    btnMessage: '',
+    emptyMessage: '',
     languageMapping: {
         "aa": "dj",
         "af": "za",
