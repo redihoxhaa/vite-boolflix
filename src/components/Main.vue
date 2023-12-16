@@ -2,6 +2,7 @@
 // IMPORTS
 import List from './List.vue';
 import { store } from '../store';
+import axios from 'axios';
 
 // /IMPORTS
 
@@ -11,7 +12,6 @@ export default {
   data() {
     return {
       store,
-
       currentSelection: '',
 
     }
@@ -19,7 +19,49 @@ export default {
   methods: {
     switchSection() {
 
-    }
+    },
+
+    loadMoreMovies() {
+      store.currentMoviePage++;
+      axios.get(store.moviesAPI, {
+        params: {
+          api_key: 'c102053cc7cdde6f47ccfb1d24cbd4e6',
+          language: store.searchLanguage,
+          query: store.searchKey,
+          page: store.currentMoviePage,
+        }
+      }).then(response => {
+        if (response.data.results.length !== 0) {
+          store.searchMovieResults = store.searchMovieResults.concat(response.data.results);
+        } else {
+          store.noMoviesLeft = true;
+          setTimeout(function () {
+            store.noMoviesLeft = false;
+          }, 500)
+        }
+      })
+    },
+
+    loadMoreTvs() {
+      store.currentTVPage++;
+      axios.get(store.tvAPI, {
+        params: {
+          api_key: 'c102053cc7cdde6f47ccfb1d24cbd4e6',
+          language: store.searchLanguage,
+          query: store.searchKey,
+          page: store.currentTVPage,
+        }
+      }).then(response => {
+        if (response.data.results.length !== 0) {
+          store.searchTvResults = store.searchTvResults.concat(response.data.results);
+        } else {
+          store.noTvsLeft = true;
+          setTimeout(function () {
+            store.noTvsLeft = false;
+          }, 500)
+        }
+      })
+    },
   },
   mounted() { },
 }
@@ -27,7 +69,7 @@ export default {
 
 <template>
   <main>
-    <TransitionGroup tag="ul" name="fade" class="container">
+    <div class="container">
       <div class="row g-2">
 
         <section class="movies">
@@ -35,28 +77,30 @@ export default {
             v-if="store.searchMovieResults.length !== 0">
             <!-- Scheda film -->
             <List :arrayToSearchIn="store.searchMovieResults" :titleKey="store.movieTitleKey"
-              :originalTitleKey="store.movieOrginalTitleKey" :sectionTitle="'Film'" />
+              :originalTitleKey="store.movieOrginalTitleKey" :sectionTitle="'Film'" :moreResultsFunction="loadMoreMovies"
+              :operasLeft="store.noMoviesLeft" />
             <!-- /Scheda film -->
           </div>
         </section>
 
 
-        <section class="tv-shows d-flex justify-content-center">
+        <section class="tv-shows">
           <div class="wrapper d-none d-lg-block" data-aos="fade-left" data-aos-duration="2000"
             v-if="store.searchTvResults.length !== 0">
             <!-- Scheda serie tv -->
             <List :arrayToSearchIn="store.searchTvResults" :titleKey="store.tvTitleKey"
-              :originalTitleKey="store.tvOrginalTitleKey" :sectionTitle="'Serie TV'" />
+              :originalTitleKey="store.tvOrginalTitleKey" :sectionTitle="'Serie TV'" :moreResultsFunction="loadMoreTvs"
+              :operasLeft="store.noTvsLeft" />
             <!-- /Scheda serie tv -->
 
           </div>
           <button class="btn btn-danger d-lg-none mt-4" v-if="store.searchTvResults.length !== 0"
-            @click="switchSection()">{{ btnMessage }}</button>
+            @click="switchSection()">{{ store.btnMessage }}</button>
         </section>
 
       </div>
 
-    </TransitionGroup>
+    </div>
   </main>
 </template>
 
@@ -67,31 +111,5 @@ export default {
 
 main {
   width: 87%;
-
-  .container {
-    height: unset;
-  }
-
-
-}
-
-/* 1. declare transition */
-.fade-move,
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
-}
-
-/* 2. declare enter from and leave to state */
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: scaleY(0.01) translate(30px, 0);
-}
-
-/* 3. ensure leaving items are taken out of layout flow so that moving
-      animations can be calculated correctly. */
-.fade-leave-active {
-  position: absolute;
 }
 </style>

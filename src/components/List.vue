@@ -1,12 +1,13 @@
 <script>
 // IMPORTS
 import { store } from '../store';
+
 import ListElement from './ListElement.vue';
 
 // /IMPORTS
 
 export default {
-    props: ['arrayToSearchIn', 'titleKey', 'originalTitleKey', 'sectionTitle'],
+    props: ['arrayToSearchIn', 'titleKey', 'originalTitleKey', 'sectionTitle', 'moreResultsFunction', 'operasLeft'],
     components: { ListElement },
     data() {
         return {
@@ -14,7 +15,9 @@ export default {
 
         }
     },
-    methods: {},
+    methods: {
+
+    },
     mounted() { },
 }
 </script>
@@ -24,13 +27,17 @@ export default {
         <header class="mb-1 d-flex justify-content-center">
             <h2>{{ sectionTitle }}</h2>
         </header>
-        <ul class="col-12 d-flex pb-3">
+
+        <ul class="col-12 d-flex align-items-center pb-3">
             <li v-for="result in arrayToSearchIn" class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <ListElement :titleKey="result[titleKey]" :originalTitleKey="result[originalTitleKey]"
                     :posterPath="result.poster_path" :language="result.original_language" :vote="result.vote_average"
                     :overview="result.overview" />
             </li>
+            <li><button class="load-more-btn btn ms-2 me-4" :class="{ shake: operasLeft }"
+                    @click="moreResultsFunction">+</button></li>
         </ul>
+
     </div>
 </template>
 
@@ -38,6 +45,7 @@ export default {
 // USES
 @use '../assets/scss/partials/variables' as *;
 @use '../assets/scss/partials/reset';
+@use '../assets/scss/partials/animations' as *;
 
 // /USES
 
@@ -79,5 +87,17 @@ header {
 
 ul {
     overflow-x: scroll;
+
+
+    button {
+        background-color: $main-color;
+        color: $text-color;
+        padding-top: 3px;
+
+        &:hover {
+            background-color: $highlighted-btn;
+            color: $text-color;
+        }
+    }
 }
 </style>

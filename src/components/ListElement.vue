@@ -2,6 +2,7 @@
 // IMPORTS
 import { store } from '../store';
 
+
 // /IMPORTS
 
 export default {
@@ -9,7 +10,8 @@ export default {
     components: {},
     data() {
         return {
-            store
+            store,
+            moreInfo: false,
         }
     },
     computed: {
@@ -28,6 +30,10 @@ export default {
 
         },
 
+        showMoreInfo() {
+            this.moreInfo = !this.moreInfo
+        }
+
     },
     mounted() {
     },
@@ -38,24 +44,31 @@ export default {
     <div class="wrapper">
         <div class="pic-container">
             <div class="border"></div>
-            <img :src="store.posterURL + posterPath" :alt="'Copertina' + titleKey" v-if="posterPath !== null">
+            <img :src="store.posterURL + posterPath" :alt="'Copertina ' + titleKey" v-if="posterPath !== null">
             <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else>
             <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center"
                 :class="{ 'get-opacity': posterPath === null }">
-                <h2 class="opera-title">{{ titleKey }}</h2>
-                <h5 class="opera-original-title text-uppercase" v-if="originalTitleKey !== titleKey">Titolo
+                <h2 class="opera-title mb-2">{{ titleKey }}</h2>
+                <h5 class="opera-original-title text-uppercase mb-3" v-if="originalTitleKey !== titleKey">Titolo
                     originale: {{
                         originalTitleKey }}</h5>
-                <p class="overview pe-2">{{ overview }}</p>
+                <p class="overview pe-2" v-if="moreInfo === false">{{ overview }}</p>
+                <div class="more-infos mb-2 d-flex flex-columns text-center" v-else>
+                    <span class="genre">Prova</span>
+                    <span class="actors">Prova</span>
+                </div>
                 <div class="shadow-layer"></div>
                 <span :class="`fi fir fi-${getFlag(language)}`" v-if="getFlag(language)"></span>
                 <!-- Puoi provare a cercare 'guarani' -->
                 <p class="opera-language" v-else>{{ language.toUpperCase() }}</p>
-                <div class="opera-rate mt-3">
+                <div class="opera-rate">
                     <font-awesome-icon icon="fa-solid fa-star" v-for="n in  from10to5rate" />
                     <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate" />
-                    <p v-if="from10to5rate === 0">Questo è sicuramente un film di nicchia 😂</p>
+                    <div v-if="from10to5rate === 0" class="mt-2">Questo è sicuramente un'opera di nicchia 😂</div>
                 </div>
+                <button type="button" class="more-info-btn btn mt-3" @click="showMoreInfo()">
+                    <span>ALTRE INFO</span>
+                </button>
             </div>
         </div>
     </div>
@@ -122,7 +135,7 @@ export default {
 
             h2 {
                 color: $text-color;
-                font-size: 1.5rem;
+                font-size: 1.25rem;
             }
 
             h5,
@@ -132,7 +145,7 @@ export default {
             }
 
             h5 {
-                font-size: 1rem;
+                font-size: 0.75rem;
             }
 
             .overview {
@@ -140,10 +153,31 @@ export default {
                 opacity: 0.9;
                 max-height: 50%;
                 overflow-y: auto;
+                font-size: .875rem;
             }
+
+            .more-infos {
+                color: $text-color;
+                font-size: .875rem;
+            }
+
+
 
             .opera-rate {
                 color: $input-border-color;
+            }
+
+            .more-info-btn {
+                background-color: $main-color;
+                color: $text-color;
+                font-size: 0.75rem;
+                padding: 5px 10px;
+                position: relative;
+                border-radius: 7px;
+
+                &:hover {
+                    background-color: $highlighted-btn;
+                }
             }
 
             .shadow-layer {

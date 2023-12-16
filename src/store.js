@@ -9,7 +9,10 @@ export const store = reactive({
     tvTitleKey: 'name',
     tvOrginalTitleKey: 'original_name',
     searchMovieResults: [],
+    noMoviesLeft: false,
+
     searchTvResults: [],
+    noTvsLeft: false,
     searchLanguage: 'it-IT',
     didISearchStatus: false,
     searchKey: '',
@@ -144,6 +147,8 @@ export const store = reactive({
         "wo": "sn",
         "xh": "za",
         "zu": "za"
-    }
+    },
+    movieGenres: null,
+    tvGenres: null,
 });
 
