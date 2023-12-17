@@ -77,6 +77,7 @@ export default {
         store.priorityShow = 'movies'
       } else {
         store.priorityShow = 'tvs'
+        store.showTv = true;
       }
 
     },
@@ -88,10 +89,10 @@ export default {
 <template>
   <main>
     <div class="container">
-      <div class="row g-2">
-        <section class="movies">
+      <div class="row g-2 d-flex justify-content-center">
+        <section class="movies" v-if="store.searchMovieResults.length && store.showFilm">
           <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'tvs' }" data-aos="fade-right"
-            data-aos-duration="2000" v-if="store.searchMovieResults.length && store.showFilm">
+            data-aos-duration="2000">
             <!-- Scheda film -->
             <List :arrayToSearchIn="store.searchMovieResults" :titleKey="store.movieTitleKey"
               :originalTitleKey="store.movieOrginalTitleKey" :sectionTitle="'Film'" :moreResultsFunction="loadMoreMovies"
@@ -100,9 +101,9 @@ export default {
           </div>
         </section>
 
-        <section class="tv-shows">
+        <section class="tv-shows" v-if="store.searchTvResults.length && store.showTv">
           <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'movies' }" data-aos="fade-left"
-            data-aos-duration="2000" v-if="store.searchTvResults.length && store.showTv">
+            data-aos-duration="2000">
             <!-- Scheda serie tv -->
             <List :arrayToSearchIn="store.searchTvResults" :titleKey="store.tvTitleKey"
               :originalTitleKey="store.tvOrginalTitleKey" :sectionTitle="'Serie TV'" :moreResultsFunction="loadMoreTvs"
@@ -111,8 +112,8 @@ export default {
           </div>
         </section>
 
-        <button class="btn btn-danger d-lg-none mt-4"
-          v-if="store.searchTvResults.length && store.searchMovieResults.length" @click="switchSection()">
+        <button class="btn d-lg-none mt-4" v-if="store.searchTvResults.length && store.searchMovieResults.length"
+          @click="switchSection()">
           {{ store.btnMessage }}
         </button>
       </div>
@@ -123,9 +124,21 @@ export default {
 <style lang="scss" scoped>
 // USES
 @use "../assets/scss/partials/animations" as *;
+@use "../assets/scss/partials/variables" as *;
 // /USES
 
 main {
   width: 87%;
+
+  button {
+    background-color: $main-color;
+    color: $text-color;
+    width: 40%;
+
+    &:hover {
+      color: $text-color;
+      background-color: $highlighted-btn;
+    }
+  }
 }
 </style>

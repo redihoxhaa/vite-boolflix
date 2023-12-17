@@ -18,7 +18,8 @@
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
     "flag-icons": "^7.1.0",
-    "vue": "^3.3.11"
+    "vue": "^3.3.11",
+    "vue-window-size": "^2.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",

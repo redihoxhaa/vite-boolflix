@@ -28,14 +28,11 @@ export default {
 </script>
 
 <template>
-    <div class="wrapper"
-        :class="{ 'container': store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0 }">
-        <header data-aos="fade-up" data-aos-duration="2000" class=" d-flex flex-column gap-4"
-            :class="{ 'minimized': store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0 }">
-            <Logo />
-            <SearchBar />
-        </header>
-    </div>
+    <header data-aos="fade-up" data-aos-duration="2000" class=" d-flex flex-column align-items-center gap-4"
+        :class="{ 'minimized': store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0 }">
+        <Logo />
+        <SearchBar />
+    </header>
 </template>
 
 <style lang="scss" scoped>

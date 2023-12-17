@@ -31,7 +31,7 @@ export default {
       this.moreInfo = !this.moreInfo;
     },
   },
-  mounted() {},
+  mounted() { },
 };
 </script>
 
@@ -41,9 +41,11 @@ export default {
       <div class="border"></div>
       <img :src="store.posterURL + posterPath" :alt="'Copertina ' + titleKey" v-if="posterPath !== null" />
       <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else />
-      <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center" :class="{ 'get-opacity': posterPath === null }">
+      <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center"
+        :class="{ 'get-opacity': posterPath === null }">
         <h2 class="opera-title mb-2">{{ titleKey }}</h2>
-        <h5 class="opera-original-title text-uppercase mb-3" v-if="originalTitleKey !== titleKey">Titolo originale: {{ originalTitleKey }}</h5>
+        <h5 class="opera-original-title text-uppercase mb-3" v-if="originalTitleKey !== titleKey">Titolo originale: {{
+          originalTitleKey }}</h5>
         <p class="overview pe-2" v-if="moreInfo === false">{{ overview }}</p>
         <div class="more-infos mb-2 d-flex flex-columns text-center" v-else>
           <span class="genre">Prova</span>
@@ -80,6 +82,7 @@ export default {
     border-radius: 20px;
     overflow: hidden;
     position: relative;
+    transition: all 0.5s;
     border: 0px solid transparent;
 
     .border {
@@ -90,6 +93,10 @@ export default {
       border-radius: 20px;
       opacity: 0;
       pointer-events: none;
+    }
+
+    &:hover {
+      transform: scale(1.05);
     }
 
     &:hover .border {

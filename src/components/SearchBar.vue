@@ -13,17 +13,62 @@ export default {
       store,
     };
   },
+  computed: {
+    checkSliders() {
+      console.log("fuori dall'if");
+      // Assicurati di includere le proprietà come dipendenze
+      // in modo che la funzione venga rieseguita quando cambiano
+      return {
+        windowWidth: this.$windowWidth,
+        movieResultsLength: store.searchMovieResults.length,
+        tvResultsLength: store.searchTvResults.length
+      };
+    }
+  },
+  watch: {
+    checkSliders: {
+      handler() {
+        this.updateSliders();
+      },
+      deep: true
+    }
+  },
   methods: {
-    checkPriority() {
-      store.priorityShow = 'tvs';
-      store.showFilm = false;
-      store.showTv = true;
-      if ((store.searchMovieResults.length && store.searchTvResults.length) || (store.searchMovieResults.length && !store.searchTvResults.length)) {
-        store.priorityShow = "movies";
-        store.showFilm = true;
+    updateSliders() {
+      console.log("Ricalcolo degli sliders");
+      if (
+        this.$windowWidth >= 992 &&
+        (store.searchMovieResults.length || store.searchTvResults.length)
+      ) {
+        store.showFilm = store.searchMovieResults.length > 0;
+        store.showTv = store.searchTvResults.length > 0;
+
+        if (store.showFilm && store.showTv) {
+          store.priorityShow = 'movies';
+          store.btnMessage = 'Passa alle Serie TV';
+        } else if (store.showFilm) {
+          store.priorityShow = 'movies';
+          store.btnMessage = 'Passa alle Serie TV';
+          store.showTv = true;
+        } else if (store.showTv) {
+          store.priorityShow = 'tvs';
+          store.showFilm = true;
+        }
+        console.log("dentro il primo");
+      } else if (
+        this.$windowWidth < 992 &&
+        (store.searchMovieResults.length || store.searchTvResults.length)
+      ) {
+        store.showFilm = store.searchMovieResults.length > 0;
         store.showTv = false;
+        console.log("dentro il secondo");
+      }
+
+      if (this.$windowWidth < 992 && !store.searchMovieResults.length && store.searchTvResults.length) {
+        store.showTv = true;
       }
     },
+
 
     // Funzione per cercare i film
     searchMovie() {
@@ -49,7 +94,8 @@ export default {
               store.emptyMessage = "";
             }, 4000);
           }
-          this.checkPriority();
+
+
         });
     },
 
@@ -68,6 +114,7 @@ export default {
         .then((response) => {
           if (response.data.results.length !== 0) {
             store.searchTvResults = response.data.results;
+            store.priorityShow = 'tvs';
           } else {
             setTimeout(function () {
               store.emptyMessage = "Non ci sono risultati disponibili, potrebbe essere un'idea per un nuovo film? 😎";
@@ -76,7 +123,8 @@ export default {
               store.emptyMessage = "";
             }, 4000);
           }
-          this.checkPriority();
+
+
         });
 
     },
@@ -95,7 +143,9 @@ export default {
       this.searchTV();
     },
   },
-  mounted() { },
+  mounted() {
+    this.updateSliders();
+  }
 };
 </script>
 
@@ -130,7 +180,7 @@ export default {
   position: relative;
 
   .input-group {
-    max-width: 600px;
+    width: 600px;
 
     input {
       color: $text-color;
@@ -172,6 +222,10 @@ export default {
   .minimize {
     width: 500px !important;
     margin-bottom: 30px;
+  }
+
+  .input-group {
+    width: 300px !important;
   }
 }
 </style>

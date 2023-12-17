@@ -34,8 +34,8 @@ export default {
                     :posterPath="result.poster_path" :language="result.original_language" :vote="result.vote_average"
                     :overview="result.overview" />
             </li>
-            <li><button class="load-more-btn btn ms-2 me-4" :class="{ shake: operasLeft }"
-                    @click="moreResultsFunction">+</button></li>
+            <li><button class="load-more-btn btn ms-2 me-4" v-if="arrayToSearchIn.length > 19"
+                    :class="{ shake: operasLeft }" @click="moreResultsFunction">+</button></li>
         </ul>
 
     </div>
