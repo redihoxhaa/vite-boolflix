@@ -15,9 +15,6 @@ export default {
   },
   computed: {
     checkSliders() {
-      console.log("fuori dall'if");
-      // Assicurati di includere le proprietà come dipendenze
-      // in modo che la funzione venga rieseguita quando cambiano
       return {
         windowWidth: this.$windowWidth,
         movieResultsLength: store.searchMovieResults.length,
@@ -60,7 +57,6 @@ export default {
       ) {
         store.showFilm = store.searchMovieResults.length > 0;
         store.showTv = false;
-        console.log("dentro il secondo");
       }
 
       if (this.$windowWidth < 992 && store.searchTvResults.length && !store.searchMovieResults.length) {

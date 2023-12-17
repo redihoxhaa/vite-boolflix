@@ -1,7 +1,7 @@
 <script>
 import Header from './components/Header.vue'
 import Main from './components/Main.vue'
-
+import AOS from 'aos';
 import { store } from './store';
 
 export default {
@@ -15,13 +15,13 @@ export default {
   methods: {
 
   },
+  mounted() {
+    AOS.init();
+  }
 
 }
 </script>
 <template>
-  <ul class="dimensions">
-    <li>Window width is: {{ $windowWidth }}</li>
-  </ul>
   <div class="wrapper">
     <div class="container d-flex flex-column align-items-center justify-content-center">
       <Header />
@@ -42,13 +42,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.dimensions {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  font-size: 1rem;
-  color: white;
 }
 </style>
