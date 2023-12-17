@@ -5,7 +5,7 @@ import { store } from "../store";
 // /IMPORTS
 
 export default {
-  props: ["titleKey", "originalTitleKey", "overview", "posterPath", "vote", "language"],
+  props: ["titleKey", "originalTitleKey", "overview", "posterPath", "vote", "language", "type", "genre"],
   components: {},
   data() {
     return {
@@ -30,6 +30,49 @@ export default {
     showMoreInfo() {
       this.moreInfo = !this.moreInfo;
     },
+
+    getOperaGenres() {
+      if (this.type === 'movie') {
+        if (!this.genre || this.genre.length === 0) {
+          return
+        }
+
+        const movieGenres = [];
+
+        this.genre.forEach(genreId => {
+          const foundGenre = store.movieGenres.find(genre => genre.id === genreId);
+          if (foundGenre) {
+            movieGenres.push(foundGenre.name);
+          } else {
+            movieGenres.push('Genere sconosciuto');
+          }
+        });
+
+        return movieGenres.join(', ');
+      }
+
+      else {
+
+        if (!this.genre || this.genre.length === 0) {
+          return 'Nessun genere disponibile';
+        }
+
+        const tvGenres = [];
+
+        this.genre.forEach(genreId => {
+          const foundGenre = store.tvGenres.find(genre => genre.id === genreId);
+          if (foundGenre) {
+            tvGenres.push(foundGenre.name);
+          } else {
+            tvGenres.push('Genere sconosciuto');
+          }
+        });
+
+        return tvGenres.join(', ');
+
+      }
+
+    }
   },
   mounted() { },
 };
@@ -47,8 +90,8 @@ export default {
         <h5 class="opera-original-title text-uppercase mb-3" v-if="originalTitleKey !== titleKey">Titolo originale: {{
           originalTitleKey }}</h5>
         <p class="overview pe-2" v-if="moreInfo === false">{{ overview }}</p>
-        <div class="more-infos mb-2 d-flex flex-columns text-center" v-else>
-          <span class="genre">Prova</span>
+        <div class="more-infos mb-2 d-flex flex-column text-center" v-else>
+          <span>{{ getOperaGenres() }}</span>
           <span class="actors">Prova</span>
         </div>
         <div class="shadow-layer"></div>
@@ -58,7 +101,7 @@ export default {
         <div class="opera-rate">
           <font-awesome-icon icon="fa-solid fa-star" v-for="n in from10to5rate" />
           <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate" />
-          <div v-if="from10to5rate === 0" class="mt-2">Questo è sicuramente un'opera di nicchia 😂</div>
+          <div v-if="from10to5rate === 0" class="mt-2">Questa è sicuramente un'opera di nicchia 😂</div>
         </div>
         <button type="button" class="more-info-btn btn mt-3" @click="showMoreInfo()">
           <span>ALTRE INFO</span>

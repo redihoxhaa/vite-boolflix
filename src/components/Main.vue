@@ -122,6 +122,7 @@ export default {
           v-if="store.searchTvResults.length && store.searchMovieResults.length" @click="switchSection()">
           {{ store.btnMessage }}
         </button>
+
       </div>
     </div>
   </main>
@@ -139,7 +140,7 @@ main {
   button {
     background-color: $main-color;
     color: $text-color;
-    width: 40%;
+    width: fit-content;
 
     &:hover {
       color: $text-color;
