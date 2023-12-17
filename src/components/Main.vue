@@ -82,6 +82,10 @@ export default {
       }
 
     },
+    /*    checkMessage() {
+         if (store.searchMovieResults.length && store.searchMovieResults.length && store.priorityShow === 'movies') { store.btnMessage = 'Passa alle Serie TV' }
+       } */
+
   },
   mounted() {
 

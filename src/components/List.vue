@@ -23,8 +23,8 @@ export default {
 </script>
 
 <template>
-    <div class="col-12 ">
-        <header class="mb-1 d-flex justify-content-center">
+    <div class="col-12">
+        <header class="mb-3 d-flex justify-content-center">
             <h2>{{ sectionTitle }}</h2>
         </header>
 
@@ -33,7 +33,7 @@ export default {
             <li v-for="result in arrayToSearchIn" class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <ListElement :titleKey="result[titleKey]" :originalTitleKey="result[originalTitleKey]"
                     :posterPath="result.poster_path" :language="result.original_language" :vote="result.vote_average"
-                    :overview="result.overview" :type="this.type" :genre="result.genre_ids" />
+                    :overview="result.overview" :type="this.type" :genre="result.genre_ids" :operaID="result.id" />
             </li>
             <li><button class="load-more-btn btn ms-2 me-4" v-if="arrayToSearchIn.length > 19"
                     :class="{ shake: operasLeft }" @click="moreResultsFunction">+</button></li>

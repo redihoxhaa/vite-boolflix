@@ -1,16 +1,19 @@
 <script>
 // IMPORTS
+import axios from "axios";
 import { store } from "../store";
 
 // /IMPORTS
 
 export default {
-  props: ["titleKey", "originalTitleKey", "overview", "posterPath", "vote", "language", "type", "genre"],
+  props: ["titleKey", "originalTitleKey", "overview", "posterPath", "vote", "language", "type", "genre", "operaID"],
   components: {},
   data() {
     return {
       store,
       moreInfo: false,
+      operaActors: '',
+      operaGenres: '',
     };
   },
   computed: {
@@ -48,7 +51,7 @@ export default {
           }
         });
 
-        return movieGenres.join(', ');
+        this.operaGenres = movieGenres.join(', ');
       }
 
       else {
@@ -68,13 +71,45 @@ export default {
           }
         });
 
-        return tvGenres.join(', ');
+        this.operaGenres = tvGenres.join(', ');
 
       }
 
+    },
+
+    getActors() {
+      console.log('sono dentro');
+      if (this.type === 'movie') {
+        axios.get(`https://api.themoviedb.org/3/movie/${this.operaID}/credits?num=20&offset=0`, {
+          params: {
+            api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
+            language: 'it'
+          }
+        }).then(response => {
+          response.data.cast.splice(5, response.data.cast.length);
+          const movieActors = response.data.cast.map(element => element.name);
+          console.log(movieActors);
+          this.operaActors = movieActors.join(', ');
+        });
+      } else {
+        axios.get(`https://api.themoviedb.org/3/tv/${this.operaID}/credits?num=20&offset=0`, {
+          params: {
+            api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
+            language: 'it'
+          }
+        }).then(response => {
+          response.data.cast.splice(5, response.data.cast.length);
+          const tvActors = response.data.cast.map(element => element.name);
+          console.log(tvActors);
+          this.operaActors = tvActors.join(', ');
+        });
+      }
     }
   },
-  mounted() { },
+  mounted() {
+    this.getActors();
+    this.getOperaGenres()
+  },
 };
 </script>
 
@@ -87,23 +122,28 @@ export default {
       <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center"
         :class="{ 'get-opacity': posterPath === null }">
         <h2 class="opera-title mb-2">{{ titleKey }}</h2>
-        <h5 class="opera-original-title text-uppercase mb-3" v-if="originalTitleKey !== titleKey">Titolo originale: {{
-          originalTitleKey }}</h5>
-        <p class="overview pe-2" v-if="moreInfo === false">{{ overview }}</p>
+        <h5 class="opera-original-title text-uppercase mb-2" v-if="originalTitleKey !== titleKey && moreInfo === false">
+          Titolo originale: {{
+            originalTitleKey }}</h5>
+        <p class="overview pe-2 mb-1" v-if="moreInfo === false">{{ overview }}</p>
         <div class="more-infos mb-2 d-flex flex-column text-center" v-else>
-          <span>{{ getOperaGenres() }}</span>
-          <span class="actors">Prova</span>
+          <span class="genres mb-3 mt-2" v-if="this.operaGenres !== ''">{{ operaGenres }}</span>
+          <div class="cast-section" v-if="this.operaActors !== ''">
+            <span class="cast">CAST</span>
+            <span class="actors">{{ operaActors }}</span>
+          </div>
         </div>
         <div class="shadow-layer"></div>
         <span :class="`fi fir fi-${getFlag(language)}`" v-if="getFlag(language)"></span>
         <!-- Puoi provare a cercare 'guarani' -->
         <p class="opera-language" v-else>{{ language.toUpperCase() }}</p>
-        <div class="opera-rate">
+        <div class="opera-rate mt-2">
           <font-awesome-icon icon="fa-solid fa-star" v-for="n in from10to5rate" />
           <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate" />
-          <div v-if="from10to5rate === 0" class="mt-2">Questa è sicuramente un'opera di nicchia 😂</div>
+
         </div>
-        <button type="button" class="more-info-btn btn mt-3" @click="showMoreInfo()">
+        <button type="button" class="more-info-btn btn mt-3" @click="showMoreInfo();"
+          v-if="operaGenres !== '' && operaActors !== ''">
           <span>ALTRE INFO</span>
         </button>
       </div>
@@ -191,11 +231,40 @@ export default {
         max-height: 50%;
         overflow-y: auto;
         font-size: 0.875rem;
+        margin-bottom: 15px;
       }
 
       .more-infos {
         color: $text-color;
         font-size: 0.875rem;
+
+        .cast {
+          display: block;
+          color: $text-color;
+          position: relative;
+
+          padding: 0 30px;
+
+          &::after,
+          &::before {
+            content: "";
+            position: absolute;
+            z-index: 999;
+            top: 48%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 35%;
+            height: 2px;
+            background: linear-gradient(270deg, rgba(255, 255, 255, 1) 0%, rgba(252, 176, 69, 0) 90%);
+
+          }
+
+          &::before {
+            left: unset;
+            right: 0;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(252, 176, 69, 0) 90%);
+          }
+        }
       }
 
       .opera-rate {
