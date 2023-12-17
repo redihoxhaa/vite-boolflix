@@ -54,7 +54,6 @@ export default {
           store.priorityShow = 'tvs';
           store.showFilm = true;
         }
-        console.log("dentro il primo");
       } else if (
         this.$windowWidth < 992 &&
         (store.searchMovieResults.length || store.searchTvResults.length)
@@ -64,10 +63,19 @@ export default {
         console.log("dentro il secondo");
       }
 
-      if (this.$windowWidth < 992 && !store.searchMovieResults.length && store.searchTvResults.length) {
+      if (this.$windowWidth < 992 && store.searchTvResults.length && !store.searchMovieResults.length) {
         store.showTv = true;
+        store.showFilm = false;
+        store.priorityShow = 'tvs';
       }
-    },
+
+      if (this.$windowWidth < 992 && store.searchMovieResults.length && store.searchTvResults.length) {
+        store.showMovie = true;
+        store.priorityShow = 'movies';
+      }
+    }
+
+    ,
 
 
     // Funzione per cercare i film
@@ -94,7 +102,7 @@ export default {
               store.emptyMessage = "";
             }, 4000);
           }
-
+          this.updateSliders();
 
         });
     },
@@ -123,7 +131,7 @@ export default {
               store.emptyMessage = "";
             }, 4000);
           }
-
+          this.updateSliders();
 
         });
 
