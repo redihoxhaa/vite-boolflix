@@ -79,7 +79,7 @@ export default {
   padding: 15px;
 
   .pic-container {
-    border-radius: 20px;
+    border-radius: 15px;
     overflow: hidden;
     position: relative;
     transition: all 0.5s;
@@ -90,7 +90,7 @@ export default {
       position: absolute;
       inset: 0 0 0 0;
       z-index: 5;
-      border-radius: 20px;
+      border-radius: 15px;
       opacity: 0;
       pointer-events: none;
     }

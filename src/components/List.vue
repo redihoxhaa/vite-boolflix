@@ -1,14 +1,14 @@
 <script>
 // IMPORTS
 import { store } from '../store';
-
+import GenreSelection from "./GenreSelection.vue";
 import ListElement from './ListElement.vue';
 
 // /IMPORTS
 
 export default {
-    props: ['arrayToSearchIn', 'titleKey', 'originalTitleKey', 'sectionTitle', 'moreResultsFunction', 'operasLeft'],
-    components: { ListElement },
+    props: ['arrayToSearchIn', 'titleKey', 'originalTitleKey', 'sectionTitle', 'moreResultsFunction', 'operasLeft', 'genreArray', 'checkedGenreArray'],
+    components: { ListElement, GenreSelection },
     data() {
         return {
             store
@@ -28,6 +28,7 @@ export default {
             <h2>{{ sectionTitle }}</h2>
         </header>
 
+        <GenreSelection :genreArray="this.genreArray" :checkedGenreArray="this.checkedGenreArray" />
         <ul class="col-12 d-flex align-items-center pb-3">
             <li v-for="result in arrayToSearchIn" class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <ListElement :titleKey="result[titleKey]" :originalTitleKey="result[originalTitleKey]"

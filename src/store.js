@@ -151,6 +151,10 @@ export const store = reactive({
         "zu": "za"
     },
     movieGenres: null,
+    checkedMovieGenres: [],
+    movieGenresAPI: 'https://api.themoviedb.org/3/genre/movie/list',
     tvGenres: null,
+    checkedTvGenres: [],
+    tvGenresAPI: 'https://api.themoviedb.org/3/genre/tv/list'
 });
 

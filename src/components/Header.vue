@@ -3,7 +3,7 @@
 import Logo from './Logo.vue';
 import SearchBar from './SearchBar.vue';
 import { store } from '../store';
-import AOS from 'aos';
+
 
 
 // /IMPORTS
@@ -22,7 +22,7 @@ export default {
     methods: {
     },
     mounted() {
-        AOS.init();
+
     },
 }
 </script>

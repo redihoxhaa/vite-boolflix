@@ -17,6 +17,7 @@ export default {
     checkSliders() {
       return {
         windowWidth: this.$windowWidth,
+        windowHeight: this.$windowHeight,
         movieResultsLength: store.searchMovieResults.length,
         tvResultsLength: store.searchTvResults.length
       };
@@ -34,7 +35,7 @@ export default {
     updateSliders() {
       console.log("Ricalcolo degli sliders");
       if (
-        this.$windowWidth >= 992 &&
+        (this.$windowWidth >= 992 && this.$windowHeight >= 1065) &&
         (store.searchMovieResults.length || store.searchTvResults.length)
       ) {
         store.showFilm = store.searchMovieResults.length > 0;
@@ -52,26 +53,44 @@ export default {
           store.showFilm = true;
         }
       } else if (
-        this.$windowWidth < 992 &&
+        (this.$windowWidth < 992 || this.$windowHeight < 1065) &&
         (store.searchMovieResults.length || store.searchTvResults.length)
       ) {
         store.showFilm = store.searchMovieResults.length > 0;
         store.showTv = false;
       }
 
-      if (this.$windowWidth < 992 && store.searchTvResults.length && !store.searchMovieResults.length) {
+      if ((this.$windowWidth < 992 || this.$windowHeight < 1065) && store.searchTvResults.length && !store.searchMovieResults.length) {
         store.showTv = true;
         store.showFilm = false;
         store.priorityShow = 'tvs';
       }
 
-      if (this.$windowWidth < 992 && store.searchMovieResults.length && store.searchTvResults.length) {
+      if ((this.$windowWidth < 992 || this.$windowHeight < 1065) && store.searchMovieResults.length && store.searchTvResults.length) {
         store.showMovie = true;
         store.priorityShow = 'movies';
       }
-    }
+    },
 
-    ,
+    getGenres() {
+      axios.get(store.movieGenresAPI, {
+        params: {
+          api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
+          language: 'it'
+        }
+      }).then(response => {
+        store.movieGenres = response.data.genres
+      })
+
+      axios.get(store.tvGenresAPI, {
+        params: {
+          api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
+          language: 'it'
+        }
+      }).then(response => {
+        store.tvGenres = response.data.genres
+      })
+    },
 
 
     // Funzione per cercare i film
@@ -90,6 +109,7 @@ export default {
         .then((response) => {
           if (response.data.results.length !== 0) {
             store.searchMovieResults = response.data.results;
+
           } else {
             setTimeout(function () {
               store.emptyMessage = "Non ci sono risultati disponibili, potrebbe essere un'idea per un nuovo film? 😎";
@@ -145,6 +165,7 @@ export default {
       this.didISearch();
       this.searchMovie();
       this.searchTV();
+      this.getGenres();
     },
   },
   mounted() {

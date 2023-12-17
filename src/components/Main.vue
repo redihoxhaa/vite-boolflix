@@ -4,11 +4,12 @@ import List from "./List.vue";
 import { store } from "../store";
 import axios from "axios";
 
+
 // /IMPORTS
 
 export default {
   props: [],
-  components: { List },
+  components: { List, },
   data() {
     return {
       store,
@@ -16,8 +17,6 @@ export default {
     };
   },
   methods: {
-
-
     loadMoreMovies() {
       store.currentMoviePage++;
       axios
@@ -92,13 +91,16 @@ export default {
   <main>
     <div class="container">
       <div class="row g-2 d-flex justify-content-center">
+
         <section class="movies" v-if="store.searchMovieResults.length && store.showFilm">
           <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'tvs' }" data-aos="fade-right"
             data-aos-duration="2000">
+
             <!-- Scheda film -->
             <List :arrayToSearchIn="store.searchMovieResults" :titleKey="store.movieTitleKey"
               :originalTitleKey="store.movieOrginalTitleKey" :sectionTitle="'Film'" :moreResultsFunction="loadMoreMovies"
-              :operasLeft="store.noMoviesLeft" />
+              :operasLeft="store.noMoviesLeft" :genreArray="store.movieGenres"
+              :checkedGenreArray="store.checkedMovieGenres" />
             <!-- /Scheda film -->
           </div>
         </section>
@@ -106,16 +108,17 @@ export default {
         <section class="tv-shows" v-if="store.searchTvResults.length && store.showTv">
           <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'movies' }" data-aos="fade-left"
             data-aos-duration="2000">
+
             <!-- Scheda serie tv -->
             <List :arrayToSearchIn="store.searchTvResults" :titleKey="store.tvTitleKey"
               :originalTitleKey="store.tvOrginalTitleKey" :sectionTitle="'Serie TV'" :moreResultsFunction="loadMoreTvs"
-              :operasLeft="store.noTvsLeft" />
+              :operasLeft="store.noTvsLeft" :genreArray="store.tvGenres" :checkedGenreArray="store.checkedTvGenres" />
             <!-- /Scheda serie tv -->
           </div>
         </section>
 
-        <button class="btn d-lg-none mt-4" v-if="store.searchTvResults.length && store.searchMovieResults.length"
-          @click="switchSection()">
+        <button class="btn d-lg-none mt-4" :class="{ 'showIt': this.$windowHeight < 1065 }"
+          v-if="store.searchTvResults.length && store.searchMovieResults.length" @click="switchSection()">
           {{ store.btnMessage }}
         </button>
       </div>
@@ -142,5 +145,9 @@ main {
       background-color: $highlighted-btn;
     }
   }
+}
+
+.showIt {
+  display: block !important;
 }
 </style>
