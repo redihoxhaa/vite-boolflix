@@ -33,6 +33,7 @@ export default {
             store.searchMovieResults = store.searchMovieResults.concat(
               response.data.results
             );
+            store.filteredMovies = store.searchMovieResults
           } else {
             store.noMoviesLeft = true;
             setTimeout(function () {
@@ -58,6 +59,7 @@ export default {
             store.searchTvResults = store.searchTvResults.concat(
               response.data.results
             );
+            store.filteredTvs = store.searchTvResults
           } else {
             store.noTvsLeft = true;
             setTimeout(function () {
@@ -97,10 +99,9 @@ export default {
             data-aos-duration="2000">
 
             <!-- Scheda film -->
-            <List :arrayToSearchIn="store.searchMovieResults" :titleKey="store.movieTitleKey"
+            <List :arrayToSearchIn="store.filteredMovies" :titleKey="store.movieTitleKey"
               :originalTitleKey="store.movieOrginalTitleKey" :sectionTitle="'Film'" :moreResultsFunction="loadMoreMovies"
-              :operasLeft="store.noMoviesLeft" :genreArray="store.movieGenres"
-              :checkedGenreArray="store.checkedMovieGenres" />
+              :operasLeft="store.noMoviesLeft" :genreArray="store.movieGenres" :type="'movie'" />
             <!-- /Scheda film -->
           </div>
         </section>
@@ -110,9 +111,9 @@ export default {
             data-aos-duration="2000">
 
             <!-- Scheda serie tv -->
-            <List :arrayToSearchIn="store.searchTvResults" :titleKey="store.tvTitleKey"
+            <List :arrayToSearchIn="store.filteredTvs" :titleKey="store.tvTitleKey"
               :originalTitleKey="store.tvOrginalTitleKey" :sectionTitle="'Serie TV'" :moreResultsFunction="loadMoreTvs"
-              :operasLeft="store.noTvsLeft" :genreArray="store.tvGenres" :checkedGenreArray="store.checkedTvGenres" />
+              :operasLeft="store.noTvsLeft" :genreArray="store.tvGenres" :type="'tv'" />
             <!-- /Scheda serie tv -->
           </div>
         </section>

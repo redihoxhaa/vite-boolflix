@@ -7,7 +7,7 @@ import ListElement from './ListElement.vue';
 // /IMPORTS
 
 export default {
-    props: ['arrayToSearchIn', 'titleKey', 'originalTitleKey', 'sectionTitle', 'moreResultsFunction', 'operasLeft', 'genreArray', 'checkedGenreArray'],
+    props: ['arrayToSearchIn', 'titleKey', 'originalTitleKey', 'sectionTitle', 'moreResultsFunction', 'operasLeft', 'genreArray', 'type'],
     components: { ListElement, GenreSelection },
     data() {
         return {
@@ -28,7 +28,7 @@ export default {
             <h2>{{ sectionTitle }}</h2>
         </header>
 
-        <GenreSelection :genreArray="this.genreArray" :checkedGenreArray="this.checkedGenreArray" />
+        <GenreSelection :genreArray="this.genreArray" :arrayToSearchIn="this.arrayToSearchIn" :type="this.type" />
         <ul class="col-12 d-flex align-items-center pb-3">
             <li v-for="result in arrayToSearchIn" class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <ListElement :titleKey="result[titleKey]" :originalTitleKey="result[originalTitleKey]"

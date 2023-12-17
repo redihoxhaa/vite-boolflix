@@ -95,7 +95,7 @@ export default {
 
     // Funzione per cercare i film
     searchMovie() {
-      store.searchMovieResults = [];
+
       store.currentMoviePage = 1;
       axios
         .get(store.moviesAPI, {
@@ -119,12 +119,12 @@ export default {
             }, 4000);
           }
           this.updateSliders();
+          store.filteredMovies = store.searchMovieResults;
 
         });
     },
 
     searchTV() {
-      store.searchTvResults = [];
       store.currentTVPage = 1;
       axios
         .get(store.tvAPI, {
@@ -148,6 +148,7 @@ export default {
             }, 4000);
           }
           this.updateSliders();
+          store.filteredTvs = store.searchTvResults;
 
         });
 

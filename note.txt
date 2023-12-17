@@ -1,3 +1,11 @@
 Se effettui una ricerca in mobile di un risultato che ritorna solo serie tv
 e dopo ne effettui un altro che ritorna serie tv e film, devi fare un piccolo resize della finestra
-per poter visualizzare l'immagine.
+per poter visualizzare l'immagine. trigger resize
+
+
+filterdMovies = searhMovieResults.filter(movie => {
+    if (movieGenres.includes(movie.genre_ids)) {
+        return true;
+        }
+    return false;
+})
