@@ -12,13 +12,8 @@ export default {
     data() {
         return {
             store
-
         }
-    },
-    methods: {
-
-    },
-    mounted() { },
+    }
 }
 </script>
 
@@ -84,11 +79,8 @@ header {
     }
 }
 
-
-
 ul {
     overflow-x: scroll;
-
 
     button {
         background-color: $main-color;

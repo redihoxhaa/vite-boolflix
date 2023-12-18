@@ -17,11 +17,15 @@ export default {
     };
   },
   computed: {
+
+    // Computed property per convertire voto da 1 a 10 a 1 a 5
     from10to5rate() {
       return Math.ceil((this.vote * 5) / 10);
     },
   },
   methods: {
+
+    // Funzione per convertire lingua in bandiera
     getFlag(lang) {
       const result = store.languageMapping[lang];
       if (!!result) {
@@ -30,10 +34,12 @@ export default {
       return false;
     },
 
+    // Funzione per gestire variabile di stato del pulsante per mostrare più info nella scheda opera
     showMoreInfo() {
       this.moreInfo = !this.moreInfo;
     },
 
+    // Funzione per ricavare i generi nella scheda opera
     getOperaGenres() {
       if (this.type === 'movie') {
         if (!this.genre || this.genre.length === 0) {
@@ -77,8 +83,8 @@ export default {
 
     },
 
+    // Funzione per ricavare gli attori nella scheda opera
     getActors() {
-
       if (this.type === 'movie') {
         axios.get(`https://api.themoviedb.org/3/movie/${this.operaID}/credits?num=20&offset=0`, {
           params: {

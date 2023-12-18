@@ -1,21 +1,9 @@
 <script>
 // IMPORTS
 
-
-
 // /IMPORTS
 
-export default {
-    props: [],
-    components: {},
-    data() {
-        return {
-
-        }
-    },
-    methods: {},
-    mounted() { },
-}
+export default {}
 </script>
 
 <template>

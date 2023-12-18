@@ -4,7 +4,6 @@ import List from "./List.vue";
 import { store } from "../store";
 import axios from "axios";
 
-
 // /IMPORTS
 
 export default {
@@ -17,6 +16,8 @@ export default {
     };
   },
   methods: {
+
+    // Funzione per caricare più film
     loadMoreMovies() {
       store.currentMoviePage++;
       axios
@@ -43,6 +44,7 @@ export default {
         });
     },
 
+    // Funzione per caricare più serie tv
     loadMoreTvs() {
       store.currentTVPage++;
       axios
@@ -69,6 +71,7 @@ export default {
         });
     },
 
+    // Funzione per passare da film a serie tv
     switchSection() {
       store.showFilm = !store.showFilm;
       store.showTv = !store.showTv;
@@ -87,9 +90,6 @@ export default {
        } */
 
   },
-  mounted() {
-
-  },
 };
 </script>
 
@@ -98,34 +98,40 @@ export default {
     <div class="container">
       <div class="row g-2 d-flex justify-content-center">
 
+        <!-- Scheda film -->
         <section class="movies" v-if="store.searchMovieResults.length && store.showFilm">
           <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'tvs' }" data-aos="fade-right"
             data-aos-duration="2000">
 
-            <!-- Scheda film -->
+
             <List :arrayToSearchIn="store.filteredMovies" :titleKey="store.movieTitleKey"
               :originalTitleKey="store.movieOrginalTitleKey" :sectionTitle="'Film'" :moreResultsFunction="loadMoreMovies"
               :operasLeft="store.noMoviesLeft" :genreArray="store.movieGenres" :type="'movie'" />
-            <!-- /Scheda film -->
+
           </div>
         </section>
+        <!-- /Scheda film -->
 
+        <!-- Scheda serie tv -->
         <section class="tv-shows" v-if="store.searchTvResults.length && store.showTv">
           <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'movies' }" data-aos="fade-left"
             data-aos-duration="2000">
 
-            <!-- Scheda serie tv -->
+
             <List :arrayToSearchIn="store.filteredTvs" :titleKey="store.tvTitleKey"
               :originalTitleKey="store.tvOrginalTitleKey" :sectionTitle="'Serie TV'" :moreResultsFunction="loadMoreTvs"
               :operasLeft="store.noTvsLeft" :genreArray="store.tvGenres" :type="'tv'" />
-            <!-- /Scheda serie tv -->
+
           </div>
         </section>
+        <!-- /Scheda serie tv -->
 
+        <!-- Pulsante per switchare sezione -->
         <button class="btn d-lg-none mt-4" :class="{ 'showIt': this.$windowHeight < 1065 }"
           v-if="store.searchTvResults.length && store.searchMovieResults.length" @click="switchSection()">
           {{ store.btnMessage }}
         </button>
+        <!-- Pulsante per switchare sezione -->
 
       </div>
     </div>

@@ -1,7 +1,7 @@
 <script>
 // IMPORTS
-import { store } from '../store';
 
+import { store } from '../store';
 
 // /IMPORTS
 
@@ -15,6 +15,8 @@ export default {
         }
     },
     methods: {
+
+        // Funzione per filtrare i risultati per genere
         filterResults() {
 
             if (this.type === 'movie') {
@@ -30,6 +32,7 @@ export default {
 
         },
 
+        // Funzione per tracciare quali generi sono stati checkati
         checkToggle(id, event) {
             let array = store.checkedMovieGenres;
             if (this.type === 'tv') {
@@ -47,7 +50,6 @@ export default {
 
         }
     },
-    mounted() { },
 }
 </script>
 
@@ -66,6 +68,8 @@ export default {
 // USES
 
 @use '../assets/scss/partials/variables' as *;
+
+// /USES
 
 ul {
 
@@ -101,6 +105,4 @@ ul {
     margin-bottom: 10px;
     justify-content: start !important;
 }
-
-// /USES
 </style>

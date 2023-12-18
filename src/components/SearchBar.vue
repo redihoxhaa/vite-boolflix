@@ -1,9 +1,9 @@
 <script>
 // IMPORTS
 
-import { faRupiahSign } from "@fortawesome/free-solid-svg-icons";
 import { store } from "../store";
 import axios from "axios";
+
 // /IMPORTS
 
 export default {
@@ -14,6 +14,7 @@ export default {
       store,
     };
   },
+
   computed: {
     checkSliders() {
       return {
@@ -24,6 +25,7 @@ export default {
       };
     }
   },
+
   watch: {
     checkSliders: {
       handler() {
@@ -32,12 +34,15 @@ export default {
       deep: true
     }
   },
+
   methods: {
 
+    // Funzione per spostare l'header in alto dopo la ricerca
     didIClick() {
       store.firstClick = false;
     },
 
+    // Funzione per tenere traccia del resize e modifica la visibilità degli elementi
     updateSliders() {
       if (
         (this.$windowWidth >= 992 && this.$windowHeight >= 1065) &&
@@ -77,6 +82,7 @@ export default {
       }
     },
 
+    // Funzione per ottenre i generi di film e serie
     getGenres() {
       axios.get(store.movieGenresAPI, {
         params: {
@@ -129,6 +135,7 @@ export default {
         });
     },
 
+    // Funzione per cercare le serie tv
     searchTV() {
       store.searchTvResults = [];
       store.currentTVPage = 1;
@@ -160,6 +167,7 @@ export default {
 
     },
 
+    // Funzione per gestire animazioni di ricerca
     didISearch() {
       store.didISearchStatus = true;
       store.searchKey = store.searchKeyPreview;
@@ -170,6 +178,7 @@ export default {
       store.searchKeyPreview = '';
     },
 
+    // Funzione di utility per click bottone cerca
     searchHandler() {
 
       this.didISearch();
@@ -208,8 +217,10 @@ export default {
 
 <style lang="scss" scoped>
 // USES
+
 @use "../assets/scss/partials/variables" as *;
 @use "../assets/scss/partials/animations" as *;
+
 // /USES
 
 .wrapper {

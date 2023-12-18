@@ -8,18 +8,12 @@ export default {
   data() {
     return {
       store,
-
-
     }
   },
   components: { Header, Main },
-  methods: {
-
-  },
   mounted() {
     AOS.init();
   }
-
 }
 </script>
 <template>
@@ -39,7 +33,7 @@ export default {
 // /USES
 .wrapper {
   width: 100vw;
-  height: 90vh;
+  height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;

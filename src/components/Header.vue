@@ -4,25 +4,16 @@ import Logo from './Logo.vue';
 import SearchBar from './SearchBar.vue';
 import { store } from '../store';
 
-
-
 // /IMPORTS
 
 export default {
     props: [],
-    components: {
-        Logo, SearchBar
-    },
+    components: { Logo, SearchBar },
     data() {
         return {
             store,
 
         }
-    },
-    methods: {
-    },
-    mounted() {
-
     },
 }
 </script>
@@ -45,8 +36,6 @@ export default {
         transition: all 1s ease-out;
     }
 }
-
-
 
 .minimized {
     width: 87%;
