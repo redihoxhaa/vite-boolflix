@@ -22,7 +22,7 @@ export default {
     <header data-aos="fade-up" data-aos-duration="2000" class=" d-flex flex-column align-items-center gap-4"
         :class="{ 'minimized': store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0 }">
         <Logo />
-        <SearchBar />
+        <SearchBar @update="$emit('update')" />
     </header>
 </template>
 

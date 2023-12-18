@@ -11,6 +11,11 @@ export default {
     }
   },
   components: { Header, Main },
+  methods: {
+    dothis() {
+      console.log('fai questo')
+    }
+  },
   mounted() {
     AOS.init();
   }
@@ -19,7 +24,7 @@ export default {
 <template>
   <div :class="{ wrapper: store.firstClick }">
     <div class="container d-flex flex-column align-items-center justify-content-center py-5">
-      <Header />
+      <Header @update="dothis()" />
       <Main v-if="store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0" />
     </div>
   </div>

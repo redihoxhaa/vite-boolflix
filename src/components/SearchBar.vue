@@ -77,8 +77,11 @@ export default {
       }
 
       if ((this.$windowWidth < 992 || this.$windowHeight < 844) && store.searchMovieResults.length && store.searchTvResults.length) {
+        console.log('scommettiamo?')
+        // if (!store.priorityShow === 'tv') {
         store.showMovie = true;
         store.priorityShow = 'movies';
+        // }
       }
     },
 
@@ -204,7 +207,8 @@ export default {
       <input type=" text" class="form-control shadow-none" placeholder="Cosa vuoi guardare oggi?"
         aria-label="Cosa vuoi guardare oggi?" aria-describedby="button-addon2" v-model="store.searchKeyPreview"
         @keyup.enter="searchHandler();" />
-      <button class="btn btn-outline-secondary" type="button" id="search-btn" @click="searchHandler()">Cerca</button>
+      <button class="btn btn-outline-secondary" type="button" id="search-btn"
+        @click="searchHandler(); $emit('update')">Cerca</button>
     </div>
     <p class="empty-search-msg" v-if="store.searchKey === '' && store.didISearchStatus === true">E che devo cercare, il
       nulla? 🤔</p>
