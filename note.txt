@@ -2,4 +2,4 @@ Se effettui una ricerca in mobile di un risultato che ritorna solo serie tv
 e dopo ne effettui un altro che ritorna serie tv e film, devi fare un piccolo resize della finestra
 per poter visualizzare l'immagine. trigger resize
 
-Se sei su serie TV e fai resize passa a film
+Se sei su serie TV e fai resize passa a film, e di conseguenza si rompe il pulsante

@@ -1,6 +1,7 @@
 <script>
 // IMPORTS
 
+import { faRupiahSign } from "@fortawesome/free-solid-svg-icons";
 import { store } from "../store";
 import axios from "axios";
 // /IMPORTS
@@ -167,10 +168,10 @@ export default {
       this.didISearch();
       this.searchMovie();
       this.searchTV();
-      this.getGenres();
     },
   },
   mounted() {
+    this.getGenres();
     this.updateSliders();
   }
 };
