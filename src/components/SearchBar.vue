@@ -114,10 +114,10 @@ export default {
           } else {
             setTimeout(function () {
               store.emptyMessage = "Non ci sono risultati disponibili, potrebbe essere un'idea per un nuovo film? 😎";
-            }, 500);
+            }, 200);
             setTimeout(function () {
               store.emptyMessage = "";
-            }, 4000);
+            }, 2000);
           }
 
           store.filteredMovies = store.searchMovieResults;
@@ -144,10 +144,10 @@ export default {
           } else {
             setTimeout(function () {
               store.emptyMessage = "Non ci sono risultati disponibili, potrebbe essere un'idea per un nuovo film? 😎";
-            }, 500);
+            }, 200);
             setTimeout(function () {
               store.emptyMessage = "";
-            }, 4000);
+            }, 2000);
           }
 
           store.filteredTvs = store.searchTvResults;
@@ -161,7 +161,9 @@ export default {
       store.searchKey = store.searchKeyPreview;
       setTimeout(function () {
         store.didISearchStatus = false;
-      }, 3000);
+      }, 1500);
+
+      store.searchKeyPreview = '';
     },
 
     searchHandler() {
