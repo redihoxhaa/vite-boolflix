@@ -9,6 +9,7 @@ export default {
     return {
       store,
 
+
     }
   },
   components: { Header, Main },
@@ -22,8 +23,8 @@ export default {
 }
 </script>
 <template>
-  <div class="wrapper">
-    <div class="container d-flex flex-column align-items-center justify-content-center">
+  <div :class="{ wrapper: store.firstClick }">
+    <div class="container d-flex flex-column align-items-center justify-content-center py-5">
       <Header />
       <Main v-if="store.searchMovieResults.length !== 0 || store.searchTvResults.length !== 0" />
     </div>

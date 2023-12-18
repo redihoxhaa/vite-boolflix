@@ -4,6 +4,7 @@ export const store = reactive({
     moviesAPI: 'https://api.themoviedb.org/3/search/movie',
     tvAPI: 'https://api.themoviedb.org/3/search/tv',
     posterURL: 'https://image.tmdb.org/t/p/w342/',
+    firstClick: true,
     movieTitleKey: 'title',
     movieOrginalTitleKey: 'original_title',
     tvTitleKey: 'name',

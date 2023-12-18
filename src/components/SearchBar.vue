@@ -33,6 +33,11 @@ export default {
     }
   },
   methods: {
+
+    didIClick() {
+      store.firstClick = false;
+    },
+
     updateSliders() {
       console.log("Ricalcolo degli sliders");
       if (
@@ -167,9 +172,11 @@ export default {
     },
 
     searchHandler() {
+
       this.didISearch();
       this.searchMovie();
       this.searchTV();
+      this.didIClick()
     },
   },
   mounted() {
