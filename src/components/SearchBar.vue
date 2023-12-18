@@ -44,43 +44,50 @@ export default {
 
     // Funzione per tenere traccia del resize e modifica la visibilità degli elementi
     updateSliders() {
+
       if (
         (this.$windowWidth >= 992 && this.$windowHeight >= 844) &&
         (store.searchMovieResults.length || store.searchTvResults.length)
       ) {
+        console.log('if1?');
         store.showFilm = store.searchMovieResults.length > 0;
         store.showTv = store.searchTvResults.length > 0;
 
         if (store.showFilm && store.showTv) {
-          store.priorityShow = 'movies';
+          // store.priorityShow = 'movies';
           store.btnMessage = 'Passa alle Serie TV';
         } else if (store.showFilm) {
-          store.priorityShow = 'movies';
+          // store.priorityShow = 'movies';
           store.btnMessage = 'Passa alle Serie TV';
           store.showTv = true;
         } else if (store.showTv) {
-          store.priorityShow = 'tvs';
+          // store.priorityShow = 'tvs';
           store.showFilm = true;
         }
       } else if (
+
         (this.$windowWidth < 992 || this.$windowHeight < 844) &&
         (store.searchMovieResults.length || store.searchTvResults.length)
       ) {
+        console.log('if2?');
         store.showFilm = store.searchMovieResults.length > 0;
         store.showTv = false;
       }
 
       if ((this.$windowWidth < 992 || this.$windowHeight < 844) && store.searchTvResults.length && !store.searchMovieResults.length) {
+        console.log('if3?');
         store.showTv = true;
         store.showFilm = false;
-        store.priorityShow = 'tvs';
+        // store.priorityShow = 'tvs';
       }
 
       if ((this.$windowWidth < 992 || this.$windowHeight < 844) && store.searchMovieResults.length && store.searchTvResults.length) {
-        console.log('scommettiamo?')
+        console.log('if4?');
         // if (!store.priorityShow === 'tv') {
-        store.showMovie = true;
-        store.priorityShow = 'movies';
+        if (!store.showTv) {
+          store.showMovie = true;
+        }
+        // store.priorityShow = 'movies';
         // }
       }
     },
@@ -154,7 +161,7 @@ export default {
         .then((response) => {
           if (response.data.results.length !== 0) {
             store.searchTvResults = response.data.results;
-            store.priorityShow = 'tvs';
+            // store.priorityShow = 'tvs';
           } else {
             setTimeout(function () {
               store.emptyMessage = "Non ci sono risultati disponibili, potrebbe essere un'idea per un nuovo film? 😎";

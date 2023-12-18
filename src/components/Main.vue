@@ -76,20 +76,22 @@ export default {
       store.showFilm = !store.showFilm;
       store.showTv = !store.showTv;
       store.showFilm ? store.btnMessage = 'Passa alle Serie TV' : store.btnMessage = 'Passa ai Film';
+      /* 
+            if (store.priorityShow === 'tvs') {
+              store.priorityShow = 'movies'
+            } else {
+              store.priorityShow = 'tvs'
+              store.showTv = true;
+            }
+      
+          }, */
+      /*    checkMessage() {
+           if (store.searchMovieResults.length && store.searchMovieResults.length && store.priorityShow === 'movies') { store.btnMessage = 'Passa alle Serie TV' }
+         } */
 
-      if (store.priorityShow === 'tvs') {
-        store.priorityShow = 'movies'
-      } else {
-        store.priorityShow = 'tvs'
-        store.showTv = true;
-      }
 
-    },
-    /*    checkMessage() {
-         if (store.searchMovieResults.length && store.searchMovieResults.length && store.priorityShow === 'movies') { store.btnMessage = 'Passa alle Serie TV' }
-       } */
-
-  },
+    }
+  }
 };
 </script>
 
@@ -100,9 +102,7 @@ export default {
 
         <!-- Scheda film -->
         <section class="movies" v-if="store.searchMovieResults.length && store.showFilm">
-          <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'tvs' }" data-aos="fade-right"
-            data-aos-duration="2000">
-
+          <div class="wrapper d-lg-block" data-aos="fade-right" data-aos-duration="2000">
 
             <List :arrayToSearchIn="store.filteredMovies" :titleKey="store.movieTitleKey"
               :originalTitleKey="store.movieOrginalTitleKey" :sectionTitle="'Film'" :moreResultsFunction="loadMoreMovies"
@@ -114,8 +114,7 @@ export default {
 
         <!-- Scheda serie tv -->
         <section class="tv-shows" v-if="store.searchTvResults.length && store.showTv">
-          <div class="wrapper d-lg-block" :class="{ 'd-none': store.priorityShow === 'movies' }" data-aos="fade-left"
-            data-aos-duration="2000">
+          <div class="wrapper d-lg-block" data-aos="fade-left" data-aos-duration="2000">
 
 
             <List :arrayToSearchIn="store.filteredTvs" :titleKey="store.tvTitleKey"

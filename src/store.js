@@ -15,7 +15,7 @@ export const store = reactive({
     searchTvResults: [],
     filteredTvs: [],
     noTvsLeft: false,
-    priorityShow: 'movies',
+    // priorityShow: 'movies',
     showFilm: false,
     showTv: false,
     searchLanguage: 'it-IT',
