@@ -127,7 +127,7 @@ export default {
         <!-- /Scheda serie tv -->
 
         <!-- Pulsante per switchare sezione -->
-        <button class="btn d-lg-none mt-4" :class="{ 'showIt': this.$windowHeight < 1065 }"
+        <button class="btn d-lg-none mt-4" :class="{ 'showIt': this.$windowHeight < 844 }"
           v-if="store.searchTvResults.length && store.searchMovieResults.length" @click="switchSection()">
           {{ store.btnMessage }}
         </button>

@@ -45,7 +45,7 @@ export default {
     // Funzione per tenere traccia del resize e modifica la visibilità degli elementi
     updateSliders() {
       if (
-        (this.$windowWidth >= 992 && this.$windowHeight >= 1065) &&
+        (this.$windowWidth >= 992 && this.$windowHeight >= 844) &&
         (store.searchMovieResults.length || store.searchTvResults.length)
       ) {
         store.showFilm = store.searchMovieResults.length > 0;
@@ -63,20 +63,20 @@ export default {
           store.showFilm = true;
         }
       } else if (
-        (this.$windowWidth < 992 || this.$windowHeight < 1065) &&
+        (this.$windowWidth < 992 || this.$windowHeight < 844) &&
         (store.searchMovieResults.length || store.searchTvResults.length)
       ) {
         store.showFilm = store.searchMovieResults.length > 0;
         store.showTv = false;
       }
 
-      if ((this.$windowWidth < 992 || this.$windowHeight < 1065) && store.searchTvResults.length && !store.searchMovieResults.length) {
+      if ((this.$windowWidth < 992 || this.$windowHeight < 844) && store.searchTvResults.length && !store.searchMovieResults.length) {
         store.showTv = true;
         store.showFilm = false;
         store.priorityShow = 'tvs';
       }
 
-      if ((this.$windowWidth < 992 || this.$windowHeight < 1065) && store.searchMovieResults.length && store.searchTvResults.length) {
+      if ((this.$windowWidth < 992 || this.$windowHeight < 844) && store.searchMovieResults.length && store.searchTvResults.length) {
         store.showMovie = true;
         store.priorityShow = 'movies';
       }
