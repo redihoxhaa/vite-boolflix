@@ -15,26 +15,6 @@ export default {
     };
   },
 
-  computed: {
-    checkSliders() {
-      return {
-        windowWidth: this.$windowWidth,
-        windowHeight: this.$windowHeight,
-        movieResultsLength: store.searchMovieResults.length,
-        tvResultsLength: store.searchTvResults.length
-      };
-    }
-  },
-
-  watch: {
-    checkSliders: {
-      handler() {
-        this.updateSliders();
-      },
-      deep: true
-    }
-  },
-
   methods: {
 
     // Funzione per spostare l'header in alto dopo la ricerca
@@ -42,55 +22,7 @@ export default {
       store.firstClick = false;
     },
 
-    // Funzione per tenere traccia del resize e modifica la visibilità degli elementi
-    updateSliders() {
 
-      if (
-        (this.$windowWidth >= 992 && this.$windowHeight >= 844) &&
-        (store.searchMovieResults.length || store.searchTvResults.length)
-      ) {
-        console.log('if1?');
-        store.showFilm = store.searchMovieResults.length > 0;
-        store.showTv = store.searchTvResults.length > 0;
-
-        if (store.showFilm && store.showTv) {
-          // store.priorityShow = 'movies';
-          store.btnMessage = 'Passa alle Serie TV';
-        } else if (store.showFilm) {
-          // store.priorityShow = 'movies';
-          store.btnMessage = 'Passa alle Serie TV';
-          store.showTv = true;
-        } else if (store.showTv) {
-          // store.priorityShow = 'tvs';
-          store.showFilm = true;
-        }
-      } else if (
-
-        (this.$windowWidth < 992 || this.$windowHeight < 844) &&
-        (store.searchMovieResults.length || store.searchTvResults.length)
-      ) {
-        console.log('if2?');
-        store.showFilm = store.searchMovieResults.length > 0;
-        store.showTv = false;
-      }
-
-      if ((this.$windowWidth < 992 || this.$windowHeight < 844) && store.searchTvResults.length && !store.searchMovieResults.length) {
-        console.log('if3?');
-        store.showTv = true;
-        store.showFilm = false;
-        // store.priorityShow = 'tvs';
-      }
-
-      if ((this.$windowWidth < 992 || this.$windowHeight < 844) && store.searchMovieResults.length && store.searchTvResults.length) {
-        console.log('if4?');
-        // if (!store.priorityShow === 'tv') {
-        if (!store.showTv) {
-          store.showMovie = true;
-        }
-        // store.priorityShow = 'movies';
-        // }
-      }
-    },
 
     // Funzione per ottenre i generi di film e serie
     getGenres() {
@@ -199,7 +131,6 @@ export default {
   },
   mounted() {
     this.getGenres();
-    this.updateSliders();
   }
 };
 </script>
@@ -214,8 +145,7 @@ export default {
       <input type=" text" class="form-control shadow-none" placeholder="Cosa vuoi guardare oggi?"
         aria-label="Cosa vuoi guardare oggi?" aria-describedby="button-addon2" v-model="store.searchKeyPreview"
         @keyup.enter="searchHandler();" />
-      <button class="btn btn-outline-secondary" type="button" id="search-btn"
-        @click="searchHandler(); $emit('update')">Cerca</button>
+      <button class="btn btn-outline-secondary" type="button" id="search-btn" @click="searchHandler()">Cerca</button>
     </div>
     <p class="empty-search-msg" v-if="store.searchKey === '' && store.didISearchStatus === true">E che devo cercare, il
       nulla? 🤔</p>

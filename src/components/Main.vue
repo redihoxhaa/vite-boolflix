@@ -71,26 +71,6 @@ export default {
         });
     },
 
-    // Funzione per passare da film a serie tv
-    switchSection() {
-      store.showFilm = !store.showFilm;
-      store.showTv = !store.showTv;
-      store.showFilm ? store.btnMessage = 'Passa alle Serie TV' : store.btnMessage = 'Passa ai Film';
-      /* 
-            if (store.priorityShow === 'tvs') {
-              store.priorityShow = 'movies'
-            } else {
-              store.priorityShow = 'tvs'
-              store.showTv = true;
-            }
-      
-          }, */
-      /*    checkMessage() {
-           if (store.searchMovieResults.length && store.searchMovieResults.length && store.priorityShow === 'movies') { store.btnMessage = 'Passa alle Serie TV' }
-         } */
-
-
-    }
   }
 };
 </script>
@@ -126,8 +106,8 @@ export default {
         <!-- /Scheda serie tv -->
 
         <!-- Pulsante per switchare sezione -->
-        <button class="btn d-lg-none mt-4" :class="{ 'showIt': this.$windowHeight < 844 }"
-          v-if="store.searchTvResults.length && store.searchMovieResults.length" @click="switchSection()">
+        <button class="btn d-lg-none mt-4" :class="{ 'showIt': this.$windowHeight < store.mobileHeight }"
+          v-if="store.searchTvResults.length && store.searchMovieResults.length" @click="$emit('switchIt')">
           {{ store.btnMessage }}
         </button>
         <!-- Pulsante per switchare sezione -->

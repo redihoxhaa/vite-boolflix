@@ -55,7 +55,7 @@ export default {
 
 <template>
     <ul class="d-flex gap-2 flex-wrap justify-content-center"
-        :class="{ 'lineIt': this.$windowHeight < 844 || this.$windowWidth < 992 }">
+        :class="{ 'lineIt': this.$windowHeight < store.mobileHeight || this.$windowWidth < store.mobileWidth }">
         <li class="" v-for="(genre) in this.genreArray">
             <button class="btn genre-btn text-uppercase" :class="{ 'checked': !didICheck }"
                 @click="checkToggle(genre.id, $event); filterResults()">
