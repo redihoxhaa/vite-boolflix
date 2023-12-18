@@ -39,7 +39,6 @@ export default {
     },
 
     updateSliders() {
-      console.log("Ricalcolo degli sliders");
       if (
         (this.$windowWidth >= 992 && this.$windowHeight >= 1065) &&
         (store.searchMovieResults.length || store.searchTvResults.length)

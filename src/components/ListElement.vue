@@ -78,7 +78,7 @@ export default {
     },
 
     getActors() {
-      console.log('sono dentro');
+
       if (this.type === 'movie') {
         axios.get(`https://api.themoviedb.org/3/movie/${this.operaID}/credits?num=20&offset=0`, {
           params: {
@@ -88,7 +88,7 @@ export default {
         }).then(response => {
           response.data.cast.splice(5, response.data.cast.length);
           const movieActors = response.data.cast.map(element => element.name);
-          console.log(movieActors);
+
           this.operaActors = movieActors.join(', ');
         });
       } else {
@@ -100,7 +100,7 @@ export default {
         }).then(response => {
           response.data.cast.splice(5, response.data.cast.length);
           const tvActors = response.data.cast.map(element => element.name);
-          console.log(tvActors);
+
           this.operaActors = tvActors.join(', ');
         });
       }

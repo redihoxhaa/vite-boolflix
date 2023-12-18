@@ -41,7 +41,7 @@ export default {
             } else {
                 array.splice(array.indexOf(id), 1)
             }
-            // console.log()
+
             event.target.classList.toggle('checked')
 
 
