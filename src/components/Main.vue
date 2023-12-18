@@ -139,7 +139,7 @@ export default {
 // /USES
 
 main {
-  width: 87%;
+  width: 70%;
 
   button {
     background-color: $main-color;
