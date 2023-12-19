@@ -14,15 +14,22 @@ export default {
       moreInfo: false,
       operaActors: '',
       operaGenres: '',
+      maxVote: 5,
     };
   },
   computed: {
 
     // Computed property per convertire voto da 1 a 10 a 1 a 5
-    from10to5rate() {
-      return Math.ceil((this.vote * 5) / 10);
+    fullStars() {
+      return Math.ceil(this.vote / 2);
     },
+
+    emptyStars() {
+      return this.maxVote - this.fullStars;
+    }
   },
+
+
   methods: {
 
     // Funzione per convertire lingua in bandiera
@@ -145,8 +152,8 @@ export default {
           <!-- Puoi provare a cercare 'guarani' -->
           <p class="opera-language" v-else>{{ language.toUpperCase() }}</p>
           <div class="opera-rate mt-2">
-            <font-awesome-icon icon="fa-solid fa-star" v-for="n in from10to5rate" />
-            <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate" />
+            <font-awesome-icon icon="fa-solid fa-star" v-for="n in fullStars" />
+            <font-awesome-icon icon="fa-regular fa-star" v-for="n in emptyStars" />
 
           </div>
           <button type="button" class="more-info-btn btn mt-3" @click="showMoreInfo();"
