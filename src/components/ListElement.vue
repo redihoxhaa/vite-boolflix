@@ -88,8 +88,8 @@ export default {
       if (this.type === 'movie') {
         axios.get(`https://api.themoviedb.org/3/movie/${this.operaID}/credits?num=20&offset=0`, {
           params: {
-            api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
-            language: 'it'
+            api_key: store.apiKey,
+            language: store.searchLanguage
           }
         }).then(response => {
           response.data.cast.splice(5, response.data.cast.length);
@@ -100,8 +100,8 @@ export default {
       } else {
         axios.get(`https://api.themoviedb.org/3/tv/${this.operaID}/credits?num=20&offset=0`, {
           params: {
-            api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
-            language: 'it'
+            api_key: store.apiKey,
+            language: store.searchLanguage
           }
         }).then(response => {
           response.data.cast.splice(5, response.data.cast.length);

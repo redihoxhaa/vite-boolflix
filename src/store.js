@@ -7,6 +7,7 @@ export const store = reactive({
         movie: false,
         tv: false,
     },
+    apiKey: 'c102053cc7cdde6f47ccfb1d24cbd4e6',
     moviesAPI: 'https://api.themoviedb.org/3/search/movie',
     tvAPI: 'https://api.themoviedb.org/3/search/tv',
     posterURL: 'https://image.tmdb.org/t/p/w342/',
@@ -21,7 +22,6 @@ export const store = reactive({
     searchTvResults: [],
     filteredTvs: [],
     noTvsLeft: false,
-    // priorityShow: 'movies',
     showFilm: false,
     showTv: false,
     searchLanguage: 'it-IT',
@@ -159,10 +159,10 @@ export const store = reactive({
         "xh": "za",
         "zu": "za"
     },
-    movieGenres: null,
+    movieGenres: [],
     checkedMovieGenres: [],
     movieGenresAPI: 'https://api.themoviedb.org/3/genre/movie/list',
-    tvGenres: null,
+    tvGenres: [],
     checkedTvGenres: [],
     tvGenresAPI: 'https://api.themoviedb.org/3/genre/tv/list'
 });

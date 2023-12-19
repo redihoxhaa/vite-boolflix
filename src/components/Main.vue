@@ -23,7 +23,7 @@ export default {
       axios
         .get(store.moviesAPI, {
           params: {
-            api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
+            api_key: store.apiKey,
             language: store.searchLanguage,
             query: store.searchKey,
             page: store.currentMoviePage,
@@ -50,7 +50,7 @@ export default {
       axios
         .get(store.tvAPI, {
           params: {
-            api_key: "c102053cc7cdde6f47ccfb1d24cbd4e6",
+            api_key: store.apiKey,
             language: store.searchLanguage,
             query: store.searchKey,
             page: store.currentTVPage,
