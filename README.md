@@ -40,11 +40,14 @@ Abbiamo anche la possibilità di filtrare i nostri risultati tramite il toggle d
 
 Andando in hover su una scheda, noteremo un piccolo ingrandimento ed evidenziamento della stessa, e compariranno diverse informazioni utili all'utente per saperne di più sull'opera. Nello specifico sullo sfondo comparirà la bandiera che rappresenta la lingua originale dell'opera, successivamente il titolo, il titolo originale, una descrizione, e il voto in stelle da 1 a 5.
 
-Solo se sono disponibili ulteriori info, quali genere e primi 5 attori del cast, verrà visualizzato un pulsante _Altre info_ che al click mostrerà tali informazioni.
+Solo se sono disponibili ulteriori info, quali genere e primi 5 attori del cast, verrà visualizzato un pulsante _ALTRE INFO_ che al click mostrerà tali informazioni.
 
 ![ Hover](https://imgur.com/IZXiVEe.gif)
 
 Come potete notare dalle immagini, abbiamo gestito anche il caso di resize della viewport, offrendo all'utente attraverso il click di un pulsante di passare rispettivamente tra risultati di film e serie tv.
+
+![Resize](https://imgur.com/srnwL0U.jpg)
+
 
 Ovviamente in tutti le situazioni l'utente può sempre effettuare una nuova ricerca avendo a disposizione la barra di ricerca nella parte superiore dello schermo.
 
