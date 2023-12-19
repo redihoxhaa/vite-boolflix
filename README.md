@@ -16,7 +16,7 @@ Essendo un progetto complesso e pieno di funzionalità, è stato di grande aiuto
 
 L'interfaccia si apre con una homepage minimale, animata grazie alla libreria di [**AOS**](https://michalsnik.github.io/aos/) che è stata parte fondamentale di questo progetto. Da questa gif potete avere rappresentata l'homepage.
 
-![Animazione Logo](https://imgur.com/FvVphcq.gif)
+![Logo](https://s5.gifyu.com/images/SiyOV.gif)
 
 Troviamo quindi un logo e una barra di ricerca, con la quale abbiamo gestito diversi casi (es. ricerca vuota, ricerca che non da risultati), mostrando dei messaggi che fanno capire all'utente l'esito della propria ricerca.
 
