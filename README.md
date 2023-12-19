@@ -14,9 +14,9 @@ Per quanto ci stiamo allenando ad immaginare e a scrivere quelli che possano ess
 
 Essendo un progetto complesso e pieno di funzionalità, è stato di grande aiuto per imparare un approccio più calmo e rilassato sulla progettazione.
 
-L'interfaccia si apre con una homepage minimale, animata grazie alla libreria di [**AOS**](https://michalsnik.github.io/aos/) che è stata parte fondamentale di questo progetto. Da questa gif potete avere rappresentata l'homepage.
+L'interfaccia si apre con una homepage minimale, animata grazie alla libreria di [**AOS**](https://michalsnik.github.io/aos/) che è stata parte fondamentale di questo progetto. Da questa immagine potete avere rappresentata l'homepage.
 
-![Logo](https://s5.gifyu.com/images/SiyOV.gif)
+![Logo](https://imgur.com/5P7BHRW.gif)
 
 Troviamo quindi un logo e una barra di ricerca, con la quale abbiamo gestito diversi casi (es. ricerca vuota, ricerca che non da risultati), mostrando dei messaggi che fanno capire all'utente l'esito della propria ricerca.
 
