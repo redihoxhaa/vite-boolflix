@@ -20,23 +20,29 @@ L'interfaccia si apre con una homepage minimale, animata grazie alla libreria di
 
 Troviamo quindi un logo e una barra di ricerca, con la quale abbiamo gestito diversi casi (es. ricerca vuota, ricerca che non da risultati), mostrando dei messaggi che fanno capire all'utente l'esito della propria ricerca.
 
+![Nessun risultato](https://imgur.com/VghqAi9.jpg)
+
 I risultati che otteniamo sono di due tipi come si può notare dall'immagine sottostante:
 
 ![Ricerca](https://imgur.com/FAFuys6.jpg)
 
 Nella parte superiore troviamo i _Film_ e in quella inferiore le _Serie Tv_. L'utente ha la possibilità di scrollare orizzontalmente le opere dei film che sono limitate a 20 risultati inizialmente, con la possibilità di arricchire la ricerca premendo sul pulsante rosso affianco l'ultimo risultato (che compare solamente nel caso in cui ci siano 20 schede in pagina, e vibra se l'ulteriore ricerca non porta ulteriori risultati).
 
-![+Ricerca](https://imgur.com/j6hLM8H.jpg)
+![Ulteriori risultati](https://imgur.com/j6hLM8H.jpg)
+
+Nel momento in cui non è disponibile la copertina di un'opera, verrà mostrato un poster di default (come nel secondo risultato) con già disponibili le info che avremmo ottenuto in hover sull'elemento, tranne lo sfondo della lingua (anch'esso se non sarà presente una corrispondenza tra lingua e bandiera, verrà visualizzata una stringa prima del voto, con la sigla della rispettiva lingua).
+
+![Copertina default](https://imgur.com/qJTW0qC.jpg)
 
 Abbiamo anche la possibilità di filtrare i nostri risultati tramite il toggle dei generi dell'opera, che rimuoveranno dai risultati di ricerca tutti i film, o le serie tv, che non sono inerenti al genere selezionato.
 
-Andando in hover su una scheda, noteremo un piccolo ingrandimento ed evidenziamento della stessa, e compariranno diverse informazioni utili all'utente per saperne di più sull'opera. Nello specifico sullo sfondo comparirà la bandiera che rappresenta la lingua originale dell'opera, successivamente il titolo, il titolo originale, una descrizione, e il voto in stelle da 1 a 5.
+![Filtro genere](https://imgur.com/QpilJhR.jpg)
 
-![Hover](https://imgur.com/Mn1uiFI.jpg)
+Andando in hover su una scheda, noteremo un piccolo ingrandimento ed evidenziamento della stessa, e compariranno diverse informazioni utili all'utente per saperne di più sull'opera. Nello specifico sullo sfondo comparirà la bandiera che rappresenta la lingua originale dell'opera, successivamente il titolo, il titolo originale, una descrizione, e il voto in stelle da 1 a 5.
 
 Solo se sono disponibili ulteriori info, quali genere e primi 5 attori del cast, verrà visualizzato un pulsante _Altre info_ che al click mostrerà tali informazioni.
 
-![+ Info Hover](https://imgur.com/s782nVo.jpg)
+![ Hover](https://imgur.com/IZXiVEe.gif)
 
 Come potete notare dalle immagini, abbiamo gestito anche il caso di resize della viewport, offrendo all'utente attraverso il click di un pulsante di passare rispettivamente tra risultati di film e serie tv.
 

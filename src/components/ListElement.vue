@@ -121,39 +121,41 @@ export default {
 
 <template>
   <div class="wrapper">
-    <div class="pic-container">
-      <div class="border"></div>
-      <img :src="store.posterURL + posterPath" :alt="'Copertina ' + titleKey" v-if="posterPath !== null" />
-      <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else />
-      <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center"
-        :class="{ 'get-opacity': posterPath === null }">
-        <h2 class="opera-title mb-2">{{ titleKey }}</h2>
-        <h5 class="opera-original-title text-uppercase mb-2" v-if="originalTitleKey !== titleKey && moreInfo === false">
-          Titolo originale: {{
-            originalTitleKey }}</h5>
-        <p class="overview pe-2 mb-1" v-if="moreInfo === false">{{ overview }}</p>
-        <div class="more-infos mb-2 d-flex flex-column text-center" v-else>
-          <span class="genres mb-3 mt-2" v-if="this.operaGenres !== ''">{{ operaGenres }}</span>
-          <div class="cast-section" v-if="this.operaActors !== ''">
-            <span class="cast">CAST</span>
-            <span class="actors">{{ operaActors }}</span>
+    <a href="#">
+      <div class="pic-container">
+        <div class="border"></div>
+        <img :src="store.posterURL + posterPath" :alt="'Copertina ' + titleKey" v-if="posterPath !== null" />
+        <img src="../assets/img/blank_poster.png" alt="Default poster image" v-else />
+        <div class="opera-info d-flex flex-column align-items-center justify-content-center p-4 text-center"
+          :class="{ 'get-opacity': posterPath === null }">
+          <h2 class="opera-title mb-2">{{ titleKey }}</h2>
+          <h5 class="opera-original-title text-uppercase mb-2" v-if="originalTitleKey !== titleKey && moreInfo === false">
+            Titolo originale: {{
+              originalTitleKey }}</h5>
+          <p class="overview pe-2 mb-1" v-if="moreInfo === false">{{ overview }}</p>
+          <div class="more-infos mb-2 d-flex flex-column text-center" v-else>
+            <span class="genres mb-3 mt-2" v-if="this.operaGenres !== ''">{{ operaGenres }}</span>
+            <div class="cast-section" v-if="this.operaActors !== ''">
+              <span class="cast">CAST</span>
+              <span class="actors">{{ operaActors }}</span>
+            </div>
           </div>
-        </div>
-        <div class="shadow-layer"></div>
-        <span :class="`fi fir fi-${getFlag(language)}`" v-if="getFlag(language)"></span>
-        <!-- Puoi provare a cercare 'guarani' -->
-        <p class="opera-language" v-else>{{ language.toUpperCase() }}</p>
-        <div class="opera-rate mt-2">
-          <font-awesome-icon icon="fa-solid fa-star" v-for="n in from10to5rate" />
-          <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate" />
+          <div class="shadow-layer"></div>
+          <span :class="`fi fir fi-${getFlag(language)}`" v-if="getFlag(language)"></span>
+          <!-- Puoi provare a cercare 'guarani' -->
+          <p class="opera-language" v-else>{{ language.toUpperCase() }}</p>
+          <div class="opera-rate mt-2">
+            <font-awesome-icon icon="fa-solid fa-star" v-for="n in from10to5rate" />
+            <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - from10to5rate" />
 
+          </div>
+          <button type="button" class="more-info-btn btn mt-3" @click="showMoreInfo();"
+            v-if="operaGenres !== '' && operaActors !== ''">
+            <span>ALTRE INFO</span>
+          </button>
         </div>
-        <button type="button" class="more-info-btn btn mt-3" @click="showMoreInfo();"
-          v-if="operaGenres !== '' && operaActors !== ''">
-          <span>ALTRE INFO</span>
-        </button>
       </div>
-    </div>
+    </a>
   </div>
 </template>
 
