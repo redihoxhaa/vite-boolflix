@@ -8,7 +8,9 @@ export default {}
 
 <template>
     <div class="pic-container">
-        <img src="/img/boolflix_logo.png" alt="Boolflix logo">
+        <a href="#">
+            <img src="/img/boolflix_logo.png" alt="Boolflix logo">
+        </a>
     </div>
 </template>
 

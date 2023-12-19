@@ -19,7 +19,7 @@ export default {
 
     // Funzione per spostare l'header in alto dopo la ricerca
     didIClick() {
-      store.firstClick = false;
+      store.firstClick = store.searchMovieResults.length === 0 && store.searchTvResults.length === 0;
     },
 
 
@@ -63,6 +63,9 @@ export default {
           if (response.data.results.length !== 0) {
             store.searchMovieResults = response.data.results;
 
+            if (store.searchMovieResults.length < 4) {
+              store.center.movie = true;
+            }
           } else {
             setTimeout(function () {
               store.emptyMessage = "Non ci sono risultati disponibili, potrebbe essere un'idea per un nuovo film? 😎";
@@ -73,6 +76,7 @@ export default {
           }
 
           store.filteredMovies = store.searchMovieResults;
+          this.didIClick();
 
         });
     },
@@ -93,7 +97,10 @@ export default {
         .then((response) => {
           if (response.data.results.length !== 0) {
             store.searchTvResults = response.data.results;
-            // store.priorityShow = 'tvs';
+
+            if (store.searchTvResults.length < 4) {
+              store.center.tv = true;
+            }
           } else {
             setTimeout(function () {
               store.emptyMessage = "Non ci sono risultati disponibili, potrebbe essere un'idea per un nuovo film? 😎";
@@ -104,6 +111,8 @@ export default {
           }
 
           store.filteredTvs = store.searchTvResults;
+          this.didIClick();
+
 
         });
 
@@ -126,7 +135,7 @@ export default {
       this.didISearch();
       this.searchMovie();
       this.searchTV();
-      this.didIClick()
+
     },
   },
   mounted() {

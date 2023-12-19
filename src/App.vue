@@ -50,7 +50,6 @@ export default {
     updateSliders() {
 
       if (this.$windowWidth >= store.mobileWidth && this.$windowHeight >= store.mobileHeight) {
-        console.log('if1?');
         store.showFilm = store.searchMovieResults.length > 0;
         store.showTv = store.searchTvResults.length > 0;
         // Quando siamo in mobile
@@ -66,11 +65,9 @@ export default {
           // FILM SI E TV SI
         } else if (store.searchMovieResults.length && store.searchTvResults.length) {
           if (this.currentSection === 'tvs') {
-            console.log('sono qui 1');
             store.showTv = true;
             store.showFilm = false;
           } else {
-            console.log('sono qui 2');
             this.currentSection = 'movies';
             store.showFilm = true;
             store.showTv = false;

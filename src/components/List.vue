@@ -24,7 +24,7 @@ export default {
         </header>
 
         <GenreSelection :genreArray="this.genreArray" :arrayToSearchIn="this.arrayToSearchIn" :type="this.type" />
-        <ul class="col-12 d-flex align-items-center pb-3">
+        <ul class="col-12 d-flex align-items-center pb-3" :class="{ 'justify-content-center': store.center[this.type] }">
             <li v-for="result in arrayToSearchIn" class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <ListElement :titleKey="result[titleKey]" :originalTitleKey="result[originalTitleKey]"
                     :posterPath="result.poster_path" :language="result.original_language" :vote="result.vote_average"
@@ -92,5 +92,12 @@ ul {
             color: $text-color;
         }
     }
+}
+
+@media only screen and (max-width: 991.98px) {
+    ul {
+        justify-content: flex-start !important;
+    }
+
 }
 </style>

@@ -3,6 +3,10 @@ import { reactive } from 'vue'
 export const store = reactive({
     mobileWidth: 992,
     mobileHeight: 900,
+    center: {
+        movie: false,
+        tv: false,
+    },
     moviesAPI: 'https://api.themoviedb.org/3/search/movie',
     tvAPI: 'https://api.themoviedb.org/3/search/tv',
     posterURL: 'https://image.tmdb.org/t/p/w342/',
